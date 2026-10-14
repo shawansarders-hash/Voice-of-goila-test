@@ -1,0 +1,1 @@
+Voice of Goila 2.7: Corrected selectors for actual hero and .cat cards; fixed invalid stagger CSS; visible purple-only entrance/scroll animations; replaced conflicting search shine with one working light sweep. Existing database and app scripts untouched. Test staging before live deployment.
