@@ -315,6 +315,40 @@ html.vog-android-app #vogBrowserAppPrompt{
 @media(hover:hover){.cat:hover,.subcat:hover,.item:hover{transform:translateY(-3px);box-shadow:0 12px 32px #6b2c9114}}
 :focus-visible{outline:3px solid #F4B942!important;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}.cat,.subcat,.item,.btn,.primary-btn,.menu-cat{transition:none!important}}
+</style><style id="vog24-motion">
+/* VOG 2.4: mobile-first visible motion; no data or business-logic changes */
+:root{--vog24-purple:#6B2C91;--vog24-gold:#F4B942}
+@keyframes vog24-enter{0%{opacity:0;transform:translate3d(0,16px,0)}100%{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes vog24-sheen{0%,52%{transform:translateX(-165%) skewX(-18deg)}85%,100%{transform:translateX(175%) skewX(-18deg)}}
+@keyframes vog24-breathe{0%,100%{box-shadow:0 7px 22px rgba(107,44,145,.17)}50%{box-shadow:0 8px 25px rgba(107,44,145,.29),0 0 0 5px rgba(244,185,66,.10)}}
+@keyframes vog24-tap{0%{transform:scale(1)}50%{transform:scale(.965)}100%{transform:scale(1)}}
+.vog-category-view .vog-page-actions{gap:12px;align-items:center;margin-top:30px}
+.vog-category-view .vog-page-actions a,.vog-category-view .vog-page-actions button{display:inline-flex!important;align-items:center;justify-content:center;min-height:49px;border-radius:15px;font-size:14px;letter-spacing:.1px;padding:12px 19px;box-shadow:0 6px 20px rgba(107,44,145,.12);transition:transform .22s ease,box-shadow .22s ease,background .22s ease;will-change:transform}
+.vog-category-view .vog-page-actions a[href="index.html"]{background:linear-gradient(140deg,#fff,#f2e8f8)!important;border:1.5px solid rgba(107,44,145,.33)!important;box-shadow:0 7px 18px rgba(107,44,145,.13),inset 0 1px 0 white!important;color:#6B2C91!important}
+.vog-category-view .vog-page-actions a:not([href="index.html"]){background:linear-gradient(135deg,#fff,#f7f1fb);border-color:#cfb7dd;color:#6B2C91}
+.vog-category-view .vog-page-actions .vog-add{background:linear-gradient(120deg,#6B2C91,#8240a6)!important;border:1px solid #6B2C91!important;color:#fff!important;animation:vog24-breathe 4.4s ease-in-out infinite}
+.vog-category-view .vog-page-actions .vog-add::after{content:"";display:block;position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);animation:vog24-sheen 6.5s ease-in-out infinite;pointer-events:none}
+.vog-category-view .subcategory-grid{gap:14px}
+.vog-category-view .subcat{border-radius:19px!important;border:1px solid #dfcce9!important;background:linear-gradient(145deg,#fff 4%,#f3eaf9 100%)!important;box-shadow:0 6px 19px rgba(107,44,145,.075)!important;position:relative;isolation:isolate;overflow:hidden;transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease!important}
+.vog-category-view .subcat:nth-child(3n+2){background:linear-gradient(145deg,#fff 4%,#faf1dc 100%)!important;border-color:#ecdfc4!important}
+.vog-category-view .subcat:nth-child(3n){background:linear-gradient(145deg,#fff 4%,#eee1f7 100%)!important}
+.vog-category-view .subcat::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,#6B2C91,#F4B942);opacity:.65}
+.vog-category-view .subcat b{color:#28132f;font-weight:800}
+.vog-category-view .subcat small{color:#725a7b}
+.vog-category-view .subcat:hover,.vog-category-view .subcat:focus-visible{transform:translateY(-4px)!important;box-shadow:0 14px 27px rgba(107,44,145,.16)!important;border-color:#ac7cc4!important}
+.vog-category-view .subcat:active,.vog-category-view .vog-page-actions a:active,.vog-category-view .vog-page-actions button:active{transform:scale(.965)!important}
+.vog-category-view .vog-category-hero{position:relative;overflow:hidden}
+.vog-category-view .vog-category-hero::after{content:"";position:absolute;width:260px;height:260px;right:-125px;top:-115px;border-radius:50%;background:radial-gradient(circle,rgba(244,185,66,.17),transparent 70%);pointer-events:none}
+.vog-category-view .vog-back-top{border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.075);border-radius:999px;padding:9px 16px;margin-left:0}
+.vog-category-view #subcategoryArea,.vog-category-view #resultsSection{animation:vog24-enter .48s cubic-bezier(.2,.75,.2,1) both}
+.vog-category-view .subcategory-grid .subcat{animation:vog24-enter .42s cubic-bezier(.2,.75,.2,1) both}
+.vog-category-view .subcategory-grid .subcat:nth-child(2n){animation-delay:65ms}
+.vog-category-view .subcategory-grid .subcat:nth-child(3n){animation-delay:105ms}
+.vog-category-view #cards .item{border:1px solid #e9dced;box-shadow:0 7px 20px rgba(107,44,145,.045);transition:transform .2s ease,box-shadow .2s ease}
+.vog-category-view #cards .item:active{transform:scale(.99)}
+.vog24-pressed{animation:vog24-tap .28s ease!important}
+@media(max-width:760px){.vog-category-view .vog-page-actions{padding-left:20px;padding-right:20px;gap:10px}.vog-category-view .vog-page-actions a,.vog-category-view .vog-page-actions button{font-size:13px;min-height:48px;padding:11px 14px}.vog-category-view .subcat{min-height:88px!important}}
+@media(prefers-reduced-motion:reduce){.vog-category-view .vog-page-actions .vog-add,.vog-category-view .vog-page-actions .vog-add::after,.vog-category-view #subcategoryArea,.vog-category-view #resultsSection,.vog-category-view .subcategory-grid .subcat,.vog24-pressed{animation:none!important}.vog-category-view .subcat,.vog-category-view .vog-page-actions a,.vog-category-view .vog-page-actions button{transition:none!important}}
 </style></head>
 <body>
 
@@ -1419,4 +1453,4 @@ body.vog-category-view #resultsSection{padding-top:14px}body.vog-category-view #
  }
  let tries=0;const ready=setInterval(()=>{if(setup()||++tries>=40)clearInterval(ready);},75);
 })();
-</script></body></html>
+</script><script id="vog24-touch-feedback">(function(){document.addEventListener('pointerdown',function(e){var el=e.target.closest('.vog-category-view .subcat,.vog-category-view .vog-page-actions a,.vog-category-view .vog-page-actions button');if(!el)return;el.classList.remove('vog24-pressed');void el.offsetWidth;el.classList.add('vog24-pressed');setTimeout(function(){el.classList.remove('vog24-pressed')},300)},{passive:true});})();</script></body></html>
