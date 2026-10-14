@@ -343,7 +343,23 @@ body:not(.vog-category-view) #categories .ico{background:linear-gradient(135deg,
 @media(prefers-reduced-motion:no-preference){body:not(.vog-category-view) #categories .cat,body:not(.vog-category-view) #categories .category-card{animation:vog25-rise .55s ease both}body:not(.vog-category-view) #categories .cat:nth-child(2n),body:not(.vog-category-view) #categories .category-card:nth-child(2n){animation-delay:.07s}body:not(.vog-category-view) #categories .cat:nth-child(3n){animation-delay:.12s}.hero .hero-grid{animation:vog25-rise .7s ease both}}
 @media(prefers-reduced-motion:reduce){.search button,#homeSubmitButton,.primary-btn,.vog-category-view .vog-page-actions .vog-add,.vog-category-view #vogContextAdd,.menu-quick .primary,.search button::after,#homeSubmitButton::after,.primary-btn::after,.vog-category-view .vog-page-actions .vog-add::after,.vog-category-view #vogContextAdd::after,.menu-quick .primary::after{animation:none!important}body:not(.vog-category-view) #categories .cat,body:not(.vog-category-view) #categories .category-card{animation:none!important;transition:none!important}}
 </style>
-</head>
+<style>
+/* Voice of Goila 2.6: lightweight purple motion, no data/API changes */
+@keyframes vog26-arrive{from{opacity:.45;transform:translate3d(0,15px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes vog26-breathe{0%,100%{box-shadow:0 5px 17px rgba(107,44,145,.13)}50%{box-shadow:0 8px 25px rgba(107,44,145,.24)}}
+@keyframes vog26-shine{0%,65%{transform:translateX(-170%) skewX(-22deg)}100%{transform:translateX(320%) skewX(-22deg)}}
+@keyframes vog26-photo{from{transform:scale(1.025)}to{transform:scale(1)}}
+.hero .badge,.hero h2,.hero p,.hero .search-wrap{animation:vog26-arrive .68s cubic-bezier(.2,.75,.2,1) both}
+.hero h2{animation-delay:.08s}.hero p{animation-delay:.16s}.hero .search-wrap{animation-delay:.23s}
+#categorySection .section-head{animation:vog26-arrive .65s ease-out both}
+#categories .category-card,#categories > *{animation:vog26-arrive .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(min(var(--vog-order,0),8) * 65ms);transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease}
+#categories .category-card:hover,#categories > *:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(107,44,145,.17)}
+#categories .category-card:active,#categories > *:active{transform:scale(.975)}
+.search button,.btn.add,.vog26-shine-btn{position:relative;overflow:hidden;isolation:isolate;animation:vog26-breathe 4s ease-in-out infinite}
+.search button::after,.vog26-shine-btn::after{content:'';position:absolute;inset:0;width:36%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.24),transparent);pointer-events:none;animation:vog26-shine 6s ease-in-out infinite}
+button,a{ -webkit-tap-highlight-color:transparent }
+@media(prefers-reduced-motion:reduce){.hero .badge,.hero h2,.hero p,.hero .search-wrap,#categorySection .section-head,#categories .category-card,#categories > *,.search button,.btn.add,.vog26-shine-btn,.search button::after,.vog26-shine-btn::after{animation:none!important;transition:none!important}}
+</style></head>
 <body>
 
 <div id="vogBrowserAppPrompt" role="dialog" aria-label="Voice of Goila অ্যাপ ডাউনলোড">
@@ -1352,4 +1368,26 @@ $("count").textContent=visibleCategories().length+"+";renderCats();renderMenu();
 })();
 </script>
 
-</body></html>
+<script>
+/* Search placeholder typing only when empty and unfocused. Restores configured placeholder on focus. */
+(function(){
+  const input=document.getElementById('search');if(!input)return;
+  const phrases=['গৈলার তথ্য খুঁজুন...','প্রতিষ্ঠান ও সেবা খুঁজুন...','আপনার প্রয়োজনীয় তথ্য খুঁজুন...'];
+  let index=0,letter=0,removing=false,handle=null,active=true;
+  let original=input.getAttribute('placeholder')||'প্রতিষ্ঠান, সেবা বা জায়গার নাম লিখুন...';
+  const allowed=()=>!document.hidden&&document.activeElement!==input&&!input.value&&!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  function tick(){if(!allowed()){handle=setTimeout(tick,1000);return;}
+    const word=phrases[index];input.placeholder=word.slice(0,letter)+(letter<word.length?'|':'');
+    let wait=removing?65:105;
+    if(!removing){if(letter<word.length)letter++;else{removing=true;wait=1800;}}
+    else if(letter>0)letter--;else{removing=false;index=(index+1)%phrases.length;wait=400;}
+    handle=setTimeout(tick,wait);
+  }
+  input.addEventListener('focus',()=>{input.placeholder=original;});
+  input.addEventListener('blur',()=>{original=input.getAttribute('data-vog-search-placeholder')||original;});
+  // Keep user and admin configured placeholders available when typing is inactive.
+  document.querySelectorAll('#categories > *').forEach((el,i)=>el.style.setProperty('--vog-order',i));
+  const cards=document.getElementById('categories');if(cards){const mo=new MutationObserver(()=>{Array.from(cards.children).forEach((el,i)=>el.style.setProperty('--vog-order',i));});mo.observe(cards,{childList:true});}
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)handle=setTimeout(tick,1000);
+})();
+</script></body></html>
