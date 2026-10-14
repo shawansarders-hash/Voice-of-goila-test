@@ -303,22 +303,20 @@ html.vog-android-app #vogBrowserAppPrompt{
 }
 </style>
 
-<link rel="stylesheet" href="assets/vog-upgrade.css?v=2">
 <style>
-body.vog-detail-page .hero,body.vog-detail-page #resultsSection,body.vog-detail-page #inlineAdSection,body.vog-detail-page #reviewSection,body.vog-detail-page .info-submit{display:none!important}
-body.vog-detail-page #categorySection{padding-top:24px}
-body.vog-detail-page .categories{display:none!important}
-body.vog-detail-page .subcategory-panel{display:block!important}
-body.vog-detail-page .subcategory-panel[hidden]{display:none!important}
-.vog-detail-heading{background:linear-gradient(125deg,var(--primary),var(--dark));color:#fff;padding:38px 0}
-.vog-detail-heading h1{margin:8px 0;font-size:clamp(25px,4vw,38px)}
-.vog-detail-heading a{color:#fff;text-decoration:none}
-.vog-detail-heading p{margin:0;color:#ffffffdd}
-.vog-detail-results{padding:26px 0 60px;min-height:40vh}
-.vog-detail-results .category-result-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
-.vog-detail-results .category-result-card{margin:0}
+/* Voice of Goila 2.0: original layout and palette retained */
+.hero{background:linear-gradient(90deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.86) 48%,rgba(255,255,255,.60) 100%),url("goila-drone.webp") center center/cover no-repeat!important;}
+.cat{transition:transform .2s ease,box-shadow .2s ease;}
+.cat:hover{transform:translateY(-3px);box-shadow:0 12px 28px #6b2c9120;}
+@media(max-width:700px){.hero{background-position:60% center!important;background-image:linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,255,255,.80)),url("goila-drone.webp")!important;}}
+</style><style id="vog-polish-21">
+:root{scroll-behavior:smooth}
+.cat,.subcat,.item,.btn,.primary-btn,.menu-cat{transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+@media(hover:hover){.cat:hover,.subcat:hover,.item:hover{transform:translateY(-3px);box-shadow:0 12px 32px #6b2c9114}}
+:focus-visible{outline:3px solid #F4B942!important;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}.cat,.subcat,.item,.btn,.primary-btn,.menu-cat{transition:none!important}}
 </style></head>
-<body class="vog-detail-page">
+<body>
 
 <div id="vogBrowserAppPrompt" role="dialog" aria-label="Voice of Goila অ্যাপ ডাউনলোড">
   <div class="vog-app-icon" aria-hidden="true">📱</div>
@@ -341,7 +339,7 @@ body.vog-detail-page .subcategory-panel[hidden]{display:none!important}
 <div id="menuOverlay" class="menu-overlay" onclick="closeSideMenu()"></div><aside id="sideMenu" class="side-menu" aria-hidden="true"><div class="side-menu-head"><div class="side-menu-title">দ্রুত মেনু</div><button class="side-menu-close" onclick="closeSideMenu()" aria-label="মেনু বন্ধ করুন">×</button></div><div class="side-menu-body"><div class="menu-group"><h4>সেবার বিভাগ</h4><div id="menuCategories" class="menu-cats"></div></div><div class="menu-group"><h4>জরুরি সেবা</h4><div id="menuEmergency" class="menu-emergency"></div></div><div class="menu-quick"><button class="primary" onclick="openSubmission()">➕ তথ্য যোগ করুন</button><button class="soft" onclick="scrollToReview()">⭐ রিভিউ দিন</button></div></div></aside>
 <main>
 <section class="hero"><div class="container hero-grid"><div><span class="badge" id="homeBadge">গৈলা ইউনিয়ন • ডিজিটাল তথ্য প্ল্যাটফর্ম</span><h2><span class="hero-normal" id="homeHeroLead">গৈলার প্রয়োজনীয়</span> <span id="homeHeroHighlight">তথ্য ও সেবা</span><br><span class="hero-normal" id="homeHeroTail">এখন এক জায়গায়</span></h2><p id="homeHeroDescription">স্থানীয় প্রতিষ্ঠান, জরুরি সেবা, শিক্ষা, স্বাস্থ্য, ব্যবসা, সরকারি সেবা ও গুরুত্বপূর্ণ স্থান সহজে খুঁজে নিন।</p><div class="search-wrap"><div class="search"><input id="search" autocomplete="off" placeholder="প্রতিষ্ঠান, সেবা বা জায়গার নাম লিখুন..."><button onclick="doSearch()">খুঁজুন</button></div><div id="searchPanel" class="search-panel" hidden><div id="suggestions" class="suggestions"></div><div id="searchResults"></div></div></div></div><div class="hero-card"><small>Voice of Goila</small><strong id="count">0+</strong><span>তথ্য ও সেবার বিভাগ</span><div class="mini"><div>📞 জরুরি সেবা<br><b>এক ক্লিকে কল</b></div><div>📍 লোকেশন<br><b>Google Maps</b></div></div></div></div></section>
-<div class="vog-detail-heading"><div class="container"><a href="index.html">← হোমপেজে ফিরে যান</a><h1 id="vogPageTitle">সেবার বিভাগ</h1><p id="vogPageSubtitle">গৈলার প্রয়োজনীয় তথ্য ও সেবা</p></div></div><section id="categorySection"><div class="container"><div class="section-head"><h3 id="homeCategoryTitle">সেবার বিভাগ</h3><span id="homeCategorySubtitle">প্রয়োজনীয় বিভাগ বেছে নিন</span></div><div id="categories" class="categories"></div><div id="subcategoryArea" class="subcategory-panel" hidden></div></div></section>
+<section id="categorySection"><div class="container"><div class="section-head"><h3 id="homeCategoryTitle">সেবার বিভাগ</h3><span id="homeCategorySubtitle">প্রয়োজনীয় বিভাগ বেছে নিন</span></div><div id="categories" class="categories"></div><div id="subcategoryArea" class="subcategory-panel" hidden></div></div></section>
 <section><div class="container"><div class="section-head"><h3 id="homeEmergencyTitle">🚨 জরুরি সেবা</h3><span id="homeEmergencySubtitle">দ্রুত যোগাযোগ</span></div><div class="emergency"><div id="emergencyGrid" class="emergency-grid"></div></div></div></section>
 <section id="resultsSection"><div class="container"><div class="section-head"><h3 id="listTitle">সাম্প্রতিক তথ্য</h3><span id="resultCount"></span></div><div id="cards" class="cards"></div></div></section><section id="inlineAdSection" class="inline-ad-section" hidden><div class="container"><div class="inline-ad-wrap"><button id="inlineAdClose" class="inline-ad-close" type="button" aria-label="বিজ্ঞাপন বন্ধ করুন">×</button><a id="inlineAdLink" href="#" target="_blank" rel="noopener sponsored"><img id="inlineAdImage" alt="Sponsored advertisement"></a><span class="inline-ad-label">SPONSORED</span></div></div></section>
 <section id="announcementSection" hidden><div class="container"><div class="section-head"><h3 id="homeAnnouncementTitle">📢 গুরুত্বপূর্ণ ঘোষণা</h3><span id="homeAnnouncementSubtitle">প্রয়োজনীয় তথ্য ও জনসচেতনতা</span></div><div id="announcementList" class="notice"></div></div></section>
@@ -363,7 +361,7 @@ body.vog-detail-page .subcategory-panel[hidden]{display:none!important}
 <script>
 const SITE_CONFIG={facebook:"",email:""};
 const categories=[
-["🏛️","সরকারি ও ইউনিয়ন সেবা","government"],["🏫","শিক্ষা প্রতিষ্ঠান","education"],["📚","কোচিং / হোম টিউটর","coaching"],["🏥","স্বাস্থ্যসেবা","health"],["🏪","ব্যবসা ও দোকান","business"],["🏦","ব্যাংক","banking"],["🕌","ধর্মীয় প্রতিষ্ঠান","religion"],["🚨","জরুরি নম্বর","emergency"],["🩸","ব্লাড ডোনার্স","blood"],["👮","পুলিশ","police"],["🚒","ফায়ার সার্ভিস","fire"],["🚑","অ্যাম্বুলেন্স","ambulance"],["👨‍⚕️","ডাক্তার","doctor"],["⚡","বিদ্যুৎ","electricity"],["📍","গুরুত্বপূর্ণ স্থান","places"],["🌟","গুরুত্বপূর্ণ ব্যক্তিবর্গ","people"],["🗺️","গৈলার ম্যাপ","map"],["📮","ডাকঘর","post"],["🚍","যাতায়াত ও যোগাযোগ","transport"],["🤝","সামাজিক সংগঠন","social"],["📢","গুরুত্বপূর্ণ ঘোষণা","news"]];
+["🏛️","সরকারি ও ইউনিয়ন সেবা","government"],["🏫","শিক্ষা প্রতিষ্ঠান","education"],["🩸","ব্লাড ডোনার্স","blood"],["🏥","স্বাস্থ্যসেবা","health"],["🏪","ব্যবসা ও দোকান","business"],["🏦","ব্যাংক","banking"],["🕌","ধর্মীয় প্রতিষ্ঠান","religion"],["🚨","জরুরি নম্বর","emergency"],["📚","কোচিং / হোম টিউটর","coaching"],["👮","পুলিশ","police"],["🚒","ফায়ার সার্ভিস","fire"],["🚑","অ্যাম্বুলেন্স","ambulance"],["👨‍⚕️","ডাক্তার","doctor"],["⚡","বিদ্যুৎ","electricity"],["📍","গুরুত্বপূর্ণ স্থান","places"],["🌟","গুরুত্বপূর্ণ ব্যক্তিবর্গ","people"],["🗺️","গৈলার ম্যাপ","map"],["📮","ডাকঘর","post"],["🚍","যাতায়াত ও যোগাযোগ","transport"],["🤝","সামাজিক সংগঠন","social"],["📢","গুরুত্বপূর্ণ ঘোষণা","news"]];
 const subcategories={government:[["union","ইউনিয়ন পরিষদ"],["upazila","উপজেলা সরকারি কর্মকর্তা"],["govt-office","অন্যান্য সরকারি অফিস"],["public-service","সরকারি সেবা"]],education:[["primary","প্রাথমিক বিদ্যালয়"],["secondary","মাধ্যমিক বিদ্যালয়"],["college","কলেজ"],["madrasa","মাদ্রাসা"],["teachers","শিক্ষক ও কর্মচারী"],["other","অন্যান্য শিক্ষা প্রতিষ্ঠান"]],coaching:[["coaching-center","কোচিং সেন্টার"],["home-tutor","হোম টিউটর"],["subject-tutor","বিষয়ভিত্তিক শিক্ষক"],["admission","ভর্তি / এডমিশন কোচিং"],["other","অন্যান্য"]],health:[["hospital","হাসপাতাল/ক্লিনিক"],["doctor","ডাক্তার"],["diagnostic","ডায়াগনস্টিক/ল্যাব"],["ambulance","অ্যাম্বুলেন্স"]],business:[["grocery","মুদি দোকান"],["restaurant","হোটেল/রেস্টুরেন্ট"],["pharmacy","ফার্মেসি"],["sweets","মিষ্টান্ন ভান্ডার/বেকারি"],["library","লাইব্রেরি/স্টেশনারি"],["mfs","বিকাশ/নগদ/রকেট এজেন্ট"],["fashion","কাপড় ও ফ্যাশন"],["tailor","টেইলার্স"],["cosmetics","কসমেটিকস"],["mobile","মোবাইল/ইলেকট্রনিক্স"],["mobile-service","মোবাইল সার্ভিসিং"],["computer","কম্পিউটার/ফটোকপি/অনলাইন সেবা"],["hardware","হার্ডওয়্যার/নির্মাণ সামগ্রী"],["raw-material","কাঁচামাল/পাইকারি"],["furniture","ফার্নিচার"],["salon","সেলুন/পার্লার"],["agri","কৃষি উপকরণ"],["service","অন্যান্য ব্যবসা/সেবা"]],banking:[["bank","ব্যাংক শাখা"],["atm","ATM"],["agent","ব্যাংক এজেন্ট"],["mfs","বিকাশ/নগদ/রকেট"]],religion:[["mosque","মসজিদ"],["madrasa","ধর্মীয় শিক্ষা"],["other","অন্যান্য ধর্মীয় প্রতিষ্ঠান"]],blood:[["all","সব ব্লাড ডোনার"],["a+","A+"],["a-","A-"],["b+","B+"],["b-","B-"],["o+","O+"],["o-","O-"],["ab+","AB+"],["ab-","AB-"]],people:[["entrepreneur","উদ্যোক্তা"],["notable","বিশিষ্ট ব্যক্তিবর্গ"],["university-student","দেশ-বিদেশে বিশ্ববিদ্যালয়ের শিক্ষার্থী"],["innovator","উদ্ভাবক"],["social-worker","সমাজসেবক"],["professional","অন্যান্য কৃতী/পেশাজীবী"]],post:[["post-office","ডাকঘর"]],transport:[["bus","বাস/গণপরিবহন"],["courier","ডাক/কুরিয়ার"],["garage","গ্যারেজ/মেরামত"],["other","অন্যান্য যোগাযোগ সেবা"]],social:[["social-org","সামাজিক সংগঠন"],["club","ক্লাব/যুব সংগঠন"],["ngo","এনজিও/স্বেচ্ছাসেবী সংগঠন"]],news:[]};
 let data=[
 {cat:"government",subcat:"union",name:"গৈলা ইউনিয়ন পরিষদ",address:"ঠিকানা যোগ করুন",phone:"",map:"",desc:"চেয়ারম্যান, সচিব ও অফিসের তথ্য যোগ করুন।"},
@@ -1095,7 +1093,7 @@ $("count").textContent=visibleCategories().length+"+";renderCats();renderMenu();
     }
 
     // Never trap the visitor on the loader if the network/Supabase is unavailable.
-    if(Date.now()-started>=7000){
+    if(Date.now()-started>=950){
       finish();
       return;
     }
@@ -1326,32 +1324,72 @@ $("count").textContent=visibleCategories().length+"+";renderCats();renderMenu();
 })();
 </script>
 
-
-<script>
+<style id="vog-category-21-css">
+body.vog-category-view main>.hero,body.vog-category-view main>section:not(#categorySection):not(#resultsSection){display:none!important}
+body.vog-category-view #categorySection{padding-top:0}
+body.vog-category-view #categorySection .section-head,body.vog-category-view #categories{display:none!important}
+body.vog-category-view #subcategoryArea{display:block!important;margin:0}
+body.vog-category-view #subcategoryArea .panel{box-shadow:none;border:0;background:transparent;padding:0}
+body.vog-category-view #subcategoryArea .subcat-back{display:none}
+body.vog-category-view #resultsSection{padding-top:8px}
+.vog-category-hero{background:linear-gradient(125deg,#6B2C91,#542071);color:white;padding:36px 0 34px}
+.vog-category-hero h1{font-size:clamp(27px,5vw,44px);line-height:1.35;margin:14px 0 8px}
+.vog-category-hero p{margin:0;color:#ffffffcf;font-size:16px}
+.vog-back-top{color:white;display:inline-flex;gap:8px;align-items:center;text-decoration:none;font-weight:700;font-size:15px}
+.vog-category-home{display:flex;justify-content:center;margin:34px auto 48px}
+.vog-category-home a{background:#6B2C91;color:#fff;border-radius:15px;padding:15px 28px;text-decoration:none;font-weight:800;box-shadow:0 8px 22px #6b2c9128;transition:transform .2s}
+.vog-category-home a:hover{transform:translateY(-2px)}
+.vog-category-note{margin:18px 0;padding:18px;border:1px solid #e6dbea;border-radius:15px;background:#fff}
+.vog-category-view .subcategory-grid{margin-top:20px}
+@media(max-width:760px){.vog-category-hero{padding:34px 0}.vog-category-hero h1{font-size:28px}.vog-category-view .subcategory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+<script id="vog-category-21-script">
 (function(){
- const slug=new URLSearchParams(location.search).get('section')||'blood';
- const entry=typeof categories!=='undefined'?categories.find(c=>c[2]===slug):null;
- if(!entry){document.getElementById('vogPageTitle').textContent='বিভাগ পাওয়া যায়নি';return}
- document.title=entry[1]+' | Voice of Goila';
- document.getElementById('vogPageTitle').textContent=entry[0]+' '+entry[1];
- document.getElementById('homeCategoryTitle').textContent=entry[1];
- document.getElementById('homeCategorySubtitle').textContent='এই বিভাগের তথ্য দেখুন';
- const other=['.hero','#resultsSection','#inlineAdSection','#reviewSection','.info-submit'];
- other.forEach(q=>document.querySelectorAll(q).forEach(el=>el.style.display='none'));
- if(slug==='news'){
-  document.getElementById('categorySection').style.display='none';
-  document.getElementById('announcementSection')?.scrollIntoView();
- }else if(slug==='map'){
-  document.getElementById('categorySection').insertAdjacentHTML('beforeend','<div class="container" style="padding:22px 0"><a class="primary-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/Goila+Union,+Agailjhara,+Barishal">🗺️ Google Maps-এ গৈলা দেখুন ↗</a></div>');
- }else{
-  const subs=(typeof subcategories!=='undefined'&&subcategories[slug])||[];
-  if(subs.length)showSubcategories(slug);
-  else{
-    const content=document.createElement('div');content.className='container vog-detail-results';
-    document.getElementById('categorySection').appendChild(content);
-    const list=data.filter(x=>itemMatchesCategory(x,slug));
-    content.innerHTML=list.length?'<div class="category-result-list">'+list.map(x=>'<div class="category-result-card"><h4>'+escapeHtml(x.name)+'</h4><p>📍 '+escapeHtml(x.address||'ঠিকানা যোগ করা হয়নি')+'</p>'+(x.phone?'<p>📞 '+escapeHtml(x.phone)+'</p>':'')+(x.desc?'<p>'+escapeHtml(x.desc)+'</p>':'')+'<div class="category-actions">'+(x.phone?'<a class="call" href="tel:'+escapeAttr(x.phone)+'">📞 কল করুন</a>':'')+(x.map?'<a class="map" target="_blank" rel="noopener" href="'+escapeAttr(x.map)+'">📍 Maps</a>':'')+'</div></div>').join('')+'</div>':'<div class="empty">এখনও কোনো তথ্য যোগ করা হয়নি।</div>';
+ const slug=new URLSearchParams(location.search).get('section');
+ if(!slug){location.replace('index.html');return;}
+ document.body.classList.add('vog-category-view');
+ const main=document.querySelector('main'),category=document.getElementById('categorySection');
+ const hero=document.createElement('div');hero.className='vog-category-hero';
+ hero.innerHTML='<div class="container"><a class="vog-back-top" href="index.html">← হোমপেজে ফিরে যান</a><h1 id="vogCategoryHeading">সেবার বিভাগ</h1><p>গৈলার প্রয়োজনীয় তথ্য ও সেবা</p></div>';
+ main.insertBefore(hero,main.firstChild);
+ const back=document.createElement('div');back.className='vog-category-home container';
+ back.innerHTML='<a href="index.html">← হোমপেজে ফিরে যান</a>';
+ main.appendChild(back);
+ const old=document.getElementById('vog-category-old-deeplink');if(old)old.remove();
+ let selectedSub=null,first=true;
+ function setup(){
+  if(typeof catInfo!=='function'||typeof renderCards!=='function'||typeof data==='undefined')return false;
+  const info=catInfo(slug);
+  document.getElementById('vogCategoryHeading').textContent=info[0]+' '+info[1];
+  document.title=info[1]+' | Voice of Goila';
+  const area=document.getElementById('subcategoryArea');
+  const list=typeof subcategories!=='undefined'?(subcategories[slug]||[]):[];
+  area.hidden=false;
+  if(list.length){
+   area.innerHTML='<div class="panel"><h3 style="margin:0 0 12px">'+info[0]+' '+info[1]+'</h3><div class="subcategory-grid">'+list.map(x=>'<button type="button" class="subcat" data-sub="'+x[0]+'"><b>'+x[1]+'</b><small>তথ্য দেখুন →</small></button>').join('')+'</div></div>';
+   area.querySelectorAll('[data-sub]').forEach(el=>el.addEventListener('click',()=>{
+    selectedSub=el.dataset.sub;
+    renderCards(data.filter(x=>itemMatchesSubcategory(x,slug,selectedSub)),subName(selectedSub));
+    document.getElementById('resultsSection').scrollIntoView({behavior:'smooth',block:'start'});
+   }));
+  }else{area.innerHTML='';}
+  if(slug==='emergency'){
+   const em=typeof emergencyNumbers!=='undefined'?emergencyNumbers:[];
+   area.innerHTML='<div class="panel"><h3>🚨 জরুরি যোগাযোগ</h3><div class="emergency-list">'+em.map(x=>'<div class="emergency-row"><div class="emergency-info"><b>'+x.icon+' '+x.name+'</b><span>'+x.note+'</span></div><a class="emergency-call" href="tel:'+x.phone+'">📞 '+x.phone+'</a></div>').join('')+'</div></div>';
   }
+  if(slug==='news'){
+   const announcements=document.getElementById('announcementSection');
+   if(announcements){announcements.style.display='block';announcements.hidden=false;}
+  }
+  function showRows(){
+   if(selectedSub){renderCards(data.filter(x=>itemMatchesSubcategory(x,slug,selectedSub)),subName(selectedSub));}
+   else{renderCards(data.filter(x=>itemMatchesCategory(x,slug)),info[1]);}
+  }
+  showRows();
+  // Database may finish after the shell renders; refresh without waiting on a blocking loader.
+  let attempts=0;const refresh=setInterval(()=>{if(++attempts>12){clearInterval(refresh);return;}showRows();},1000);
+  return true;
  }
+ let attempts=0;const wait=setInterval(()=>{if(setup()||++attempts>40)clearInterval(wait);},75);
 })();
 </script></body></html>

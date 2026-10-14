@@ -1,0 +1,1 @@
+Voice of Goila 2.1: original code preserved. Faster non-blocking startup; category pages scoped to their own content; no irrelevant emergency section; bottom return-home button; refined motion; original colors and hero text retained. Review, submission, admin, and Supabase code preserved. Live database behavior requires hosted testing.

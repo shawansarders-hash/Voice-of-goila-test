@@ -305,10 +305,16 @@ html.vog-android-app #vogBrowserAppPrompt{
 
 <style>
 /* Voice of Goila 2.0: original layout and palette retained */
-.hero{background:linear-gradient(90deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.86) 48%,rgba(255,255,255,.60) 100%),url("goila-drone.png") center center/cover no-repeat!important;}
+.hero{background:linear-gradient(90deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.86) 48%,rgba(255,255,255,.60) 100%),url("goila-drone.webp") center center/cover no-repeat!important;}
 .cat{transition:transform .2s ease,box-shadow .2s ease;}
 .cat:hover{transform:translateY(-3px);box-shadow:0 12px 28px #6b2c9120;}
-@media(max-width:700px){.hero{background-position:60% center!important;background-image:linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,255,255,.80)),url("goila-drone.png")!important;}}
+@media(max-width:700px){.hero{background-position:60% center!important;background-image:linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,255,255,.80)),url("goila-drone.webp")!important;}}
+</style><style id="vog-polish-21">
+:root{scroll-behavior:smooth}
+.cat,.subcat,.item,.btn,.primary-btn,.menu-cat{transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+@media(hover:hover){.cat:hover,.subcat:hover,.item:hover{transform:translateY(-3px);box-shadow:0 12px 32px #6b2c9114}}
+:focus-visible{outline:3px solid #F4B942!important;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}.cat,.subcat,.item,.btn,.primary-btn,.menu-cat{transition:none!important}}
 </style></head>
 <body>
 
@@ -1087,7 +1093,7 @@ $("count").textContent=visibleCategories().length+"+";renderCats();renderMenu();
     }
 
     // Never trap the visitor on the loader if the network/Supabase is unavailable.
-    if(Date.now()-started>=7000){
+    if(Date.now()-started>=950){
       finish();
       return;
     }
