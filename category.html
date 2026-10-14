@@ -1341,6 +1341,29 @@ body.vog-category-view #resultsSection{padding-top:14px}body.vog-category-view #
 @media(prefers-reduced-motion:reduce){.vog-category-view .subcat{animation:none}.vog-page-actions *{transition:none}}
 @media(max-width:760px){.vog-category-hero{padding:34px 0}.vog-category-hero h1{font-size:28px}.vog-category-view .subcategory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
+<style id="vog-category-23-polish">
+/* Voice of Goila 2.3: presentation-only enhancements; data/auth/form logic unchanged */
+:root{--vog-brand:#6B2C91;--vog-gold:#F4B942}
+.vog-page-actions a[href="index.html"]{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(125deg,#fff,#f7f0fc);color:var(--vog-brand);border:1px solid #d7c2e3;box-shadow:0 3px 14px rgba(107,44,145,.09);font-weight:800;position:relative;overflow:hidden}
+.vog-page-actions a[href="index.html"]:hover{background:linear-gradient(125deg,#f9f0ff,#eee0f7);border-color:var(--vog-brand);box-shadow:0 9px 24px rgba(107,44,145,.17)}
+.vog-page-actions .vog-add{position:relative;overflow:hidden;box-shadow:0 5px 16px rgba(107,44,145,.16);background:linear-gradient(130deg,#6B2C91,#8039a3)}
+.vog-page-actions .vog-add::after{content:"";position:absolute;inset:0;transform:translateX(-140%) skewX(-22deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transition:transform .65s ease;pointer-events:none}
+.vog-page-actions .vog-add:hover::after,.vog-page-actions .vog-add:focus-visible::after{transform:translateX(140%) skewX(-22deg)}
+.vog-category-view .subcategory-grid{gap:14px}
+.vog-category-view .subcat{position:relative;overflow:hidden;background:linear-gradient(145deg,#fff 10%,#faf5ff 100%);border-color:#e5d9ec;box-shadow:0 4px 18px rgba(54,24,68,.035);transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease,background .24s ease}
+.vog-category-view .subcat:nth-child(3n+2){background:linear-gradient(145deg,#fff 12%,#fbf8ef 100%)}
+.vog-category-view .subcat:nth-child(3n){background:linear-gradient(145deg,#fff 12%,#f7f1fc 100%)}
+.vog-category-view .subcat:hover,.vog-category-view .subcat:focus-visible{transform:translateY(-3px);box-shadow:0 12px 25px rgba(107,44,145,.12);border-color:#c5a3d7}
+.vog-category-view .subcat:active,.vog-page-actions a:active,.vog-page-actions button:active{transform:scale(.98)}
+.vog-category-view #cards .card,.vog-category-view #cards .result-card{transition:transform .24s ease,box-shadow .24s ease}
+.vog-category-view #cards .card:hover,.vog-category-view #cards .result-card:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(107,44,145,.08)}
+.vog-back-top{display:inline-flex;align-items:center;padding:8px 12px;margin-left:-12px;border-radius:12px;transition:background .2s,transform .2s}
+.vog-back-top:hover{background:rgba(255,255,255,.12);transform:translateX(-3px)}
+@keyframes vogContentEnter{from{opacity:.65;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+.vog-category-view #subcategoryArea,.vog-category-view #resultsSection{animation:vogContentEnter .36s ease-out both}
+@media(max-width:760px){.vog-page-actions{gap:10px}.vog-page-actions a,.vog-page-actions button{min-height:44px}.vog-category-view .subcat{min-height:80px}}
+@media(prefers-reduced-motion:reduce){.vog-category-view #subcategoryArea,.vog-category-view #resultsSection{animation:none!important}.vog-category-view .subcat,.vog-page-actions a,.vog-page-actions button,.vog-back-top{transition:none!important}.vog-page-actions .vog-add::after{display:none}}
+</style>
 <script id="vog-category-22-script">
 (function(){
  const params=new URLSearchParams(location.search),slug=params.get('section'),sub=params.get('sub');
