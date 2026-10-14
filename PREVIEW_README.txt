@@ -1,0 +1,1 @@
+Original site files retained. index.html is homepage; category.html?section=blood is an independent category page. Preview with a local HTTP server or Cloudflare Pages preview for full online functionality. Live database behavior not verified. No secrets were added.

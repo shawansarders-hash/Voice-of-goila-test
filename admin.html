@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Voice of Goila Admin</title>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<style>
+
+*{
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+
+body{
+margin:0;
+padding:20px;
+background:#f5f5f8;
+}
+
+
+
+.container{
+max-width:1000px;
+margin:auto;
+}
+
+
+
+.header{
+
+background:linear-gradient(135deg,#6B2C91,#ad4cff);
+
+padding:25px;
+
+border-radius:20px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+color:white;
+
+}
+
+
+
+.header h1{
+margin:0;
+font-size:26px;
+}
+
+
+
+.menu-btn{
+
+width:60px !important;
+
+height:60px;
+
+background:transparent;
+
+border:none;
+
+font-size:35px;
+
+color:white;
+
+cursor:pointer;
+
+}
+
+
+
+.menu{
+
+display:none;
+
+background:white;
+
+padding:15px;
+
+margin-top:15px;
+
+border-radius:15px;
+
+box-shadow:0 5px 15px #ddd;
+
+}
+
+
+
+.card{
+
+background:white;
+
+padding:25px;
+
+margin-top:20px;
+
+border-radius:20px;
+
+box-shadow:0 5px 20px #ddd;
+
+}
+
+
+
+input,
+select,
+textarea,
+button{
+
+width:100%;
+
+padding:13px;
+
+margin-top:10px;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+}
+
+
+
+button{
+
+background:#6B2C91;
+
+color:white;
+
+border:none;
+
+cursor:pointer;
+
+}
+
+
+
+.password-box{
+
+position:relative;
+
+}
+
+
+
+.password-box input{
+
+padding-right:50px;
+
+}
+
+
+
+.password-eye{
+
+position:absolute;
+
+right:15px;
+
+top:23px;
+
+cursor:pointer;
+
+font-size:20px;
+
+}
+
+
+
+.stats{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+
+gap:15px;
+
+}
+
+
+
+.stat{
+
+background:#fafafa;
+
+padding:20px;
+
+border-radius:15px;
+
+text-align:center;
+
+}
+
+
+
+.stat h2{
+
+color:#6B2C91;
+
+font-size:35px;
+
+}
+
+
+
+.item{
+
+background:#fafafa;
+
+padding:20px;
+
+border-radius:15px;
+
+margin-top:15px;
+
+border:1px solid #ddd;
+
+}
+
+
+
+.approve{
+background:green;
+}
+
+
+.reject{
+background:red;
+}
+
+
+.edit{
+background:#008000;
+}
+
+
+.delete{
+background:#d00000;
+}
+
+
+
+.cms-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+margin-top:15px;
+}
+
+.cms-panel{
+background:#fafafa;
+border:1px solid #e4e4e8;
+border-radius:15px;
+padding:18px;
+}
+
+.cms-panel h3{
+margin-top:0;
+color:#4e1f6d;
+}
+
+.cms-list{
+margin-top:14px;
+}
+
+.cms-row{
+display:grid;
+grid-template-columns:1fr auto auto;
+gap:8px;
+align-items:center;
+padding:10px 0;
+border-bottom:1px solid #e8e8ec;
+}
+
+.cms-row:last-child{
+border-bottom:none;
+}
+
+.cms-row button{
+width:auto;
+min-width:72px;
+margin-top:0;
+padding:9px 12px;
+}
+
+.cms-parent{
+display:block;
+font-size:12px;
+color:#777;
+margin-top:3px;
+}
+
+.cms-note{
+font-size:13px;
+line-height:1.55;
+color:#666;
+background:#f7f1fb;
+border-left:4px solid #6B2C91;
+padding:10px 12px;
+border-radius:8px;
+margin-top:12px;
+}
+
+
+.image-box{
+
+margin-top:15px;
+
+padding:15px;
+
+background:#fafafa;
+
+border-radius:15px;
+
+border:1px dashed #aaa;
+
+text-align:center;
+
+}
+
+
+
+.file-label{
+
+display:block;
+
+background:#6B2C91;
+
+color:white;
+
+padding:12px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+
+
+input[type=file]{
+
+display:none;
+
+}
+
+
+
+.image-preview{
+
+width:250px;
+
+height:250px;
+
+object-fit:cover;
+
+border-radius:15px;
+
+margin:15px auto;
+
+display:none;
+
+}
+
+.edit-image-actions{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+margin-top:8px;
+}
+
+.edit-image-remove{
+display:none;
+border:0;
+background:#fff0f0;
+color:#b42318;
+padding:10px 14px;
+border-radius:10px;
+font-weight:700;
+cursor:pointer;
+}
+
+.edit-image-remove:hover{
+background:#ffe2e2;
+}
+
+
+
+
+/* ==========================
+   MOBILE FRIENDLY MODAL
+========================== */
+
+
+.modal{
+
+display:none;
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,0.55);
+
+align-items:flex-start;
+
+justify-content:center;
+
+padding:20px;
+
+overflow-y:auto;
+
+z-index:9999;
+
+}
+
+
+
+.modal-box{
+
+background:white;
+
+padding:25px;
+
+width:95%;
+
+max-width:500px;
+
+border-radius:20px;
+
+margin-top:20px;
+
+margin-bottom:50px;
+
+}
+
+
+
+.modal-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+position:sticky;
+
+top:0;
+
+background:white;
+
+padding-bottom:10px;
+
+}
+
+
+
+.close-btn{
+
+width:40px !important;
+
+height:40px;
+
+padding:0;
+
+background:red;
+
+border-radius:50%;
+
+font-size:20px;
+
+color:white;
+
+}
+
+
+
+@media(max-width:600px){
+
+
+.modal-box{
+
+width:100%;
+
+padding:20px;
+
+}
+
+
+
+.image-preview{
+
+width:200px;
+
+height:200px;
+
+}
+
+
+
+}
+
+
+
+.modal-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+
+
+.close-btn{
+
+width:40px !important;
+
+height:40px;
+
+padding:0;
+
+background:red;
+
+border-radius:50%;
+
+font-size:20px;
+
+}
+
+
+
+@media(max-width:600px){
+
+.cms-grid{
+grid-template-columns:1fr;
+}
+
+.cms-row{
+grid-template-columns:1fr 1fr;
+}
+
+.cms-row > div{
+grid-column:1 / -1;
+}
+
+.stats{
+
+grid-template-columns:1fr;
+
+}
+
+
+.header h1{
+
+font-size:20px;
+
+}
+
+}
+
+
+
+/* Phase 2 Part 2 - Website Settings */
+.settings-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  margin-top:16px;
+}
+.settings-field{display:flex;flex-direction:column;gap:7px;}
+.settings-field label{font-weight:700;color:#3c2351;}
+.settings-field input{width:100%;box-sizing:border-box;}
+.settings-wide{grid-column:1/-1;}
+.settings-assets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px;}
+.settings-asset{border:1px solid #eadff0;border-radius:14px;padding:14px;background:#fcf9fd;}
+.settings-asset label{font-weight:700;display:block;margin-bottom:8px;}
+.settings-preview{width:88px;height:88px;object-fit:contain;border-radius:14px;border:1px solid #e4d7ea;background:white;padding:6px;display:none;margin-top:10px;}
+.settings-help{font-size:13px;color:#75677d;margin-top:6px;line-height:1.5;}
+.settings-actions{margin-top:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.settings-status{font-size:14px;font-weight:700;color:#5d247c;}
+@media(max-width:700px){.settings-grid,.settings-assets{grid-template-columns:1fr}.settings-wide{grid-column:auto}}
+
+
+
+/* Phase 2 Part 3 - Homepage CMS + Announcements */
+.p3-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.p3-field{display:flex;flex-direction:column;gap:6px}
+.p3-field label{font-weight:700;color:#3c2351}
+.p3-wide{grid-column:1/-1}
+.p3-field textarea{min-height:88px;resize:vertical}
+.p3-status{font-size:14px;font-weight:700;color:#5d247c;margin-left:8px}
+.announcement-form{background:#fafafa;border:1px solid #e4e4e8;border-radius:15px;padding:16px;margin-top:14px}
+.announcement-options{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.announcement-options label{display:flex;gap:7px;align-items:center;font-weight:700;color:#4e1f6d}
+.announcement-options input[type=checkbox]{width:auto;margin:0}
+.announcement-list{display:grid;gap:12px;margin-top:18px}
+.announcement-row{border:1px solid #e5ddea;background:#fcf9fd;border-radius:14px;padding:15px}
+.announcement-row.inactive{opacity:.65}
+.announcement-row-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.announcement-row h4{margin:0;color:#3b2049;font-size:17px}
+.announcement-meta{font-size:12px;color:#7d7082;margin-top:5px}
+.announcement-body{margin:10px 0;color:#5f5563;line-height:1.55;white-space:pre-wrap}
+.announcement-actions{display:flex;gap:8px;flex-wrap:wrap}
+.announcement-actions button{width:auto;min-width:84px;margin-top:0;padding:9px 12px}
+.btn-secondary{background:#6b7280}.btn-warning{background:#b7791f}
+@media(max-width:700px){.p3-grid{grid-template-columns:1fr}.p3-wide{grid-column:auto}.announcement-row-head{flex-direction:column}.announcement-actions button{flex:1}}
+
+
+/* Phase 2 Part 4 - Ads Management */
+.adm-ad-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.adm-ad-form .wide{grid-column:1/-1}
+.adm-ad-field label{display:block;font-weight:700;margin-bottom:6px;color:#4d2a5a}
+.adm-ad-field input,.adm-ad-field select{width:100%;margin:0}
+.adm-ad-upload{border:1px dashed #d7c7df;border-radius:14px;padding:14px;background:#fcf9fd}
+.adm-ad-preview{display:none;width:100%;max-height:220px;object-fit:contain;border-radius:12px;margin-top:10px;background:#f5f1f7}
+.adm-ad-options{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.adm-ad-options label{display:flex;align-items:center;gap:7px;font-weight:700}
+.adm-ad-options input[type=checkbox]{width:auto;margin:0}
+.adm-ad-list{display:grid;gap:12px;margin-top:18px}
+.adm-ad-row{border:1px solid #e5ddea;background:#fcf9fd;border-radius:14px;padding:14px;display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:start}
+.adm-ad-row.inactive{opacity:.62}
+.adm-ad-thumb{width:110px;height:85px;object-fit:cover;border-radius:10px;background:#eee}
+.adm-ad-info h4{margin:0 0 5px;color:#3b2049;font-size:16px}
+.adm-ad-meta{font-size:12px;color:#756b79;margin-top:4px;word-break:break-word}
+.adm-ad-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.adm-ad-actions button{width:auto;padding:9px 13px;margin:0}
+@media(max-width:700px){.adm-ad-form{grid-template-columns:1fr}.adm-ad-form .wide{grid-column:auto}.adm-ad-row{grid-template-columns:1fr}.adm-ad-thumb{width:100%;height:160px}.adm-ad-actions button{flex:1}}
+
+
+/* Phase 2 Part 5 - Emergency Numbers + Reviews */
+.p5-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.p5-field{display:flex;flex-direction:column;gap:6px}
+.p5-field label{font-weight:700;color:#4e1f6b;font-size:13px}
+.p5-wide{grid-column:1/-1}
+.p5-options{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px}
+.p5-options label{display:flex;align-items:center;gap:7px;font-weight:700}
+.p5-options input[type="checkbox"]{width:auto;margin:0}
+.p5-list{display:grid;gap:11px;margin-top:18px}
+.p5-row{border:1px solid #e7dfeb;background:#fcf9fd;border-radius:14px;padding:13px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.p5-row.inactive{opacity:.62}
+.p5-main{min-width:0;flex:1}
+.p5-main h4{margin:0 0 5px;color:#3b2049;font-size:16px}
+.p5-meta{font-size:12px;color:#756b79;margin-top:4px;word-break:break-word}
+.p5-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.p5-actions button{width:auto;padding:8px 11px;margin:0}
+.p5-stars{color:#e09b18;font-size:17px;letter-spacing:1px}
+.p5-review-text{margin:7px 0 0;white-space:pre-wrap;color:#4e4352;line-height:1.5}
+.p5-filter{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0 0}
+.p5-filter select{max-width:220px;margin:0}
+.p5-status{font-weight:800;font-size:12px;padding:4px 8px;border-radius:999px;background:#efe7f4;color:#5d247c;display:inline-block}
+@media(max-width:760px){.p5-grid{grid-template-columns:1fr}.p5-wide{grid-column:auto}.p5-row{flex-direction:column}.p5-actions{width:100%;justify-content:flex-start}.p5-actions button{flex:1}}
+
+
+/* Phase 2 Part 6 - Analytics Dashboard */
+.p6-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.p6-head h2{margin:0}
+.p6-head button{width:auto;margin:0;padding:10px 16px}
+.p6-note{font-size:12px;color:#756b79;margin:7px 0 0}
+.p6-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:16px}
+.p6-metric{background:#faf7fc;border:1px solid #eadff0;border-radius:14px;padding:16px;text-align:center}
+.p6-metric span{display:block;color:#756b79;font-size:12px;font-weight:700}
+.p6-metric strong{display:block;color:#6B2C91;font-size:30px;margin-top:7px}
+.p6-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:18px}
+.p6-panel{border:1px solid #e7dfeb;background:#fcf9fd;border-radius:14px;padding:15px;min-width:0}
+.p6-panel h3{margin:0 0 12px;color:#3b2049}
+.p6-daily{display:grid;gap:9px}
+.p6-day{display:grid;grid-template-columns:100px 1fr 88px;gap:9px;align-items:center;font-size:12px}
+.p6-day-label{font-weight:700;color:#4e4352}
+.p6-bar-track{height:12px;background:#eee7f1;border-radius:999px;overflow:hidden}
+.p6-bar{height:100%;background:linear-gradient(90deg,#6B2C91,#ad4cff);border-radius:999px;min-width:2px}
+.p6-day-count{text-align:right;color:#5d247c;font-weight:700;white-space:nowrap}
+.p6-devices{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.p6-device{background:#fff;border:1px solid #eadff0;border-radius:12px;padding:13px;text-align:center}
+.p6-device b{display:block;font-size:22px;color:#6B2C91;margin-top:4px}
+.p6-pages{display:grid;gap:8px}
+.p6-page{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #eee5f2;padding:9px 0}
+.p6-page:last-child{border-bottom:0}
+.p6-page-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#4e4352;font-weight:700}
+.p6-page-views{flex:0 0 auto;background:#efe7f4;color:#5d247c;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800}
+.p6-status{font-size:12px;font-weight:700;margin-top:10px;color:#5d247c}
+@media(max-width:760px){.p6-grid{grid-template-columns:1fr}.p6-day{grid-template-columns:82px 1fr 72px}.p6-devices{grid-template-columns:repeat(2,1fr)}}
+
+
+/* Phase 2 Part 7 - Media Library */
+.p7-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.p7-head h2{margin:0}
+.p7-tools{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:14px}
+.p7-tools input[type="text"]{flex:1;min-width:180px;margin:0}
+.p7-tools button,.p7-upload-label{width:auto;margin:0;padding:10px 14px}
+.p7-upload-label{display:inline-flex;align-items:center;justify-content:center;background:#7b2895;color:#fff;border-radius:8px;font-weight:700;cursor:pointer}
+.p7-upload-label input{display:none}
+.p7-status{font-size:12px;font-weight:700;color:#5d247c;margin-top:10px}
+.p7-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-top:16px}
+.p7-item{border:1px solid #e7dfeb;background:#fcf9fd;border-radius:14px;overflow:hidden;min-width:0}
+.p7-thumb{aspect-ratio:1/1;background:#f1ebf4;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.p7-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.p7-body{padding:11px}
+.p7-name{font-weight:800;color:#3b2049;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p7-path{font-size:10px;color:#85788b;word-break:break-all;margin-top:4px;min-height:28px}
+.p7-meta{font-size:10px;color:#85788b;margin-top:5px}
+.p7-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.p7-actions button{width:100%;margin:0;padding:8px 6px;font-size:11px}
+.p7-actions .danger{background:#c62828}
+.p7-empty{padding:22px;text-align:center;color:#756b79;border:1px dashed #d9cddd;border-radius:14px;grid-column:1/-1}
+@media(max-width:480px){.p7-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.p7-actions{grid-template-columns:1fr}.p7-tools>*{width:100%!important}}
+
+
+
+/* COMPLETE ENHANCEMENT PACK */
+.ce-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.ce-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.ce-field{display:flex;flex-direction:column;gap:6px}.ce-field.full{grid-column:1/-1}.ce-field label{font-size:12px;font-weight:800;color:#48205d}.ce-checks{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:10px 0}.ce-checks label{display:flex;gap:7px;align-items:center;font-weight:700}.ce-checks input{width:auto;margin:0}.ce-primary{width:auto!important;margin:0!important}.ce-badge{display:inline-flex;align-items:center;background:#f4e9fb;color:#6b2c91;border-radius:999px;padding:3px 8px;font-size:10px;font-weight:800;margin-left:6px}.ce-notice-row{border:1px solid #eadff0;border-radius:14px;padding:12px;margin:10px 0;background:#fff}.ce-notice-row.inactive{opacity:.58}.ce-notice-row img{width:72px;height:72px;border-radius:10px;object-fit:cover;float:left;margin-right:10px}.ce-notice-actions{display:flex;gap:7px;flex-wrap:wrap;clear:both;padding-top:9px}.ce-notice-status{font-size:11px;color:#6b2c91;margin-top:7px}.ce-analytics-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.ce-analytics-list{display:flex;flex-direction:column;gap:8px}.ce-analytics-row{display:flex;justify-content:space-between;gap:12px;padding:9px 10px;border:1px solid #eee2f4;border-radius:11px;background:#fff}.ce-analytics-row span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ce-analytics-row b{flex:0 0 auto;color:#6b2c91}.ce-preview{max-width:180px;max-height:140px;display:none;border-radius:12px;margin-top:8px;object-fit:cover}.ce-note{font-size:11px;color:#725d7c;line-height:1.5}.ce-directory-tools{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:8px 0 14px}.ce-directory-tools input{flex:1;min-width:220px}.ce-featured-item{border-color:#d8b6e8!important;box-shadow:0 7px 24px rgba(107,44,145,.08)}
+@media(max-width:760px){.ce-grid,.ce-analytics-grid{grid-template-columns:1fr}.ce-field.full{grid-column:auto}.ce-directory-tools>*{width:100%!important}}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+
+<div class="header">
+
+
+<h1>
+Voice of Goila Admin
+</h1>
+
+
+
+<button class="menu-btn" onclick="toggleMenu()">
+☰
+</button>
+
+
+
+</div>
+
+
+
+
+<div id="menu" class="menu">
+
+
+<button onclick="showDashboard()">
+Dashboard
+</button>
+
+
+<button onclick="showDirectory()">
+Directory
+</button>
+
+
+<button onclick="showCategories()">
+Categories
+</button>
+
+<button onclick="showWebsiteSettings()">
+Website Settings
+</button>
+
+<button onclick="showHomepageCMS()">
+Homepage CMS
+</button>
+
+<button onclick="showAnnouncements()">
+Announcements
+</button>
+
+<button onclick="showNotices()">
+Notices
+</button>
+
+<button onclick="showAds()">
+Ads
+</button>
+
+<button onclick="showEmergencyCMS()">
+Emergency
+</button>
+
+<button onclick="showReviewsCMS()">
+Reviews
+</button>
+
+<button onclick="showAnalytics()">
+Analytics
+</button>
+
+<button onclick="showMediaLibrary()">
+Media Library
+</button>
+
+<button onclick="logout()">
+Logout
+</button>
+
+
+</div>
+
+
+
+
+<div class="card" id="loginBox">
+
+
+<h2>
+Admin Login
+</h2>
+
+
+
+<input 
+id="email"
+placeholder="Email"
+>
+
+
+
+
+<div class="password-box">
+
+
+<input
+
+id="password"
+
+type="password"
+
+placeholder="Password"
+
+>
+
+
+
+<span 
+class="password-eye"
+onclick="togglePassword()">
+
+👁
+
+</span>
+
+
+</div>
+
+
+
+
+<button onclick="login()">
+
+Login
+
+</button>
+
+
+
+  </div>
+
+  <!-- DASHBOARD -->
+
+<div id="dashboard" style="display:none;">
+
+
+<div class="card">
+
+
+<div class="stats">
+
+
+<div class="stat">
+<h3>Directory</h3>
+<h2 id="total">0</h2>
+</div>
+
+<div class="stat">
+<h3>Pending</h3>
+<h2 id="pendingCount">0</h2>
+</div>
+
+<div class="stat">
+<h3>Approved</h3>
+<h2 id="approvedCount">0</h2>
+</div>
+
+<div class="stat">
+<h3>Categories</h3>
+<h2 id="categoryCount">0</h2>
+</div>
+
+<div class="stat">
+<h3>Subcategories</h3>
+<h2 id="subCategoryCount">0</h2>
+</div>
+
+<div class="stat">
+<h3>Announcements</h3>
+<h2 id="announcementCount">0</h2>
+</div>
+
+<div class="stat">
+<h3>Notices</h3>
+<h2 id="noticeCount">0</h2>
+</div>
+
+<div class="stat">
+<h3>Ads</h3>
+<h2 id="adsCount">0</h2>
+</div>
+
+<div class="stat">
+<h3>Emergency</h3>
+<h2 id="emergencyCount">0</h2>
+</div>
+
+<div class="stat">
+<h3>Pending Reviews</h3>
+<h2 id="reviewPendingCount">0</h2>
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- ANALYTICS DASHBOARD -->
+<div class="card" id="analyticsManagement">
+  <div class="p6-head">
+    <div>
+      <h2>Analytics Dashboard</h2>
+      <p class="p6-note">Unique visitor tracking এই Analytics update থেকে browser/device token দিয়ে গণনা হবে।</p>
+    </div>
+    <button onclick="loadAnalytics()">Refresh Analytics</button>
+  </div>
+
+  <div class="p6-summary">
+    <div class="p6-metric"><span>Total Visitors</span><strong id="analyticsTotalVisitors">0</strong></div>
+    <div class="p6-metric"><span>Today Visitors</span><strong id="analyticsTodayVisitors">0</strong></div>
+    <div class="p6-metric"><span>Total Page Views</span><strong id="analyticsTotalViews">0</strong></div>
+    <div class="p6-metric"><span>Last 7 Days Visitors</span><strong id="analytics7dVisitors">0</strong></div>
+  </div>
+
+  <div class="p6-grid">
+    <div class="p6-panel">
+      <h3>Last 7 Days Activity</h3>
+      <div id="analyticsDaily" class="p6-daily">Loading...</div>
+    </div>
+    <div class="p6-panel">
+      <h3>Device Breakdown</h3>
+      <div class="p6-devices">
+        <div class="p6-device">📱 Mobile<b id="analyticsMobile">0</b></div>
+        <div class="p6-device">💻 Desktop<b id="analyticsDesktop">0</b></div>
+        <div class="p6-device">📟 Tablet<b id="analyticsTablet">0</b></div>
+        <div class="p6-device">🌐 Other<b id="analyticsOther">0</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p6-panel" style="margin-top:16px">
+    <h3>Popular Pages / Sections</h3>
+    <div id="analyticsPopularPages" class="p6-pages">Loading...</div>
+  </div>
+  <div class="ce-analytics-grid">
+    <div class="p6-panel">
+      <h3>Popular Search Keywords</h3>
+      <div id="analyticsPopularSearches" class="ce-analytics-list">Loading...</div>
+    </div>
+    <div class="p6-panel">
+      <h3>Popular Directory Items</h3>
+      <div id="analyticsPopularItems" class="ce-analytics-list">Loading...</div>
+    </div>
+  </div>
+  <div id="analyticsStatus" class="p6-status"></div>
+</div>
+
+
+<!-- MEDIA LIBRARY -->
+<div class="card" id="mediaLibraryManagement">
+  <div class="p7-head">
+    <div>
+      <h2>Media Library</h2>
+      <p class="p6-note">Supabase-এর public <b>image</b> bucket-এর uploaded ছবি manage করুন। Live website-এ ব্যবহৃত image delete করা block থাকবে।</p>
+    </div>
+    <button onclick="loadMediaLibrary()" style="width:auto;margin:0">Refresh</button>
+  </div>
+
+  <div class="p7-tools">
+    <label class="p7-upload-label">📷 Upload Image
+      <input type="file" id="mediaUploadInput" accept="image/*" onchange="uploadMediaImage(event)">
+    </label>
+    <input id="mediaSearchInput" type="text" placeholder="ছবির নাম/পাথ দিয়ে খুঁজুন..." oninput="renderMediaLibrary()">
+  </div>
+  <div id="mediaLibraryStatus" class="p7-status"></div>
+  <div id="mediaLibraryGrid" class="p7-grid"><div class="p7-empty">Loading...</div></div>
+</div>
+
+
+<!-- CATEGORY / SUBCATEGORY MANAGEMENT -->
+<div class="card" id="categoryManagement">
+
+<h2>
+Category & Subcategory Management
+</h2>
+
+<p class="cms-note">
+Existing Directory/Submission-এ ব্যবহৃত Category বা Subcategory নিরাপত্তার জন্য সরাসরি Rename/Delete করা যাবে না। এতে পুরোনো data mismatch হওয়া থেকে রক্ষা পাবে।
+</p>
+
+<div class="cms-grid">
+
+<div class="cms-panel">
+<h3>Categories</h3>
+<input id="newCategoryName" placeholder="নতুন Category নাম">
+<button onclick="addManagedCategory()">+ Add Category</button>
+<div id="categoryList" class="cms-list">Loading...</div>
+</div>
+
+<div class="cms-panel">
+<h3>Subcategories</h3>
+<select id="subCategoryParent">
+<option value="">Parent Category নির্বাচন করুন</option>
+</select>
+<input id="newSubCategoryName" placeholder="নতুন Subcategory নাম">
+<button onclick="addManagedSubcategory()">+ Add Subcategory</button>
+<div id="subCategoryList" class="cms-list">Loading...</div>
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+<!-- WEBSITE SETTINGS MANAGEMENT -->
+<div class="card" id="websiteSettingsManagement">
+  <h2>Website Settings</h2>
+  <p class="cms-note">এখান থেকে Save করলে Public Website-এর নাম, logo, favicon, contact/social এবং footer developer credit/rights Supabase থেকে automatic update হবে।</p>
+
+  <div class="settings-grid">
+    <div class="settings-field settings-wide">
+      <label for="settingSiteName">Website Name</label>
+      <input id="settingSiteName" placeholder="Voice of Goila">
+    </div>
+    <div class="settings-field">
+      <label for="settingPhone">Phone</label>
+      <input id="settingPhone" placeholder="01XXXXXXXXX">
+    </div>
+    <div class="settings-field">
+      <label for="settingEmail">Email</label>
+      <input id="settingEmail" type="email" placeholder="email@example.com">
+    </div>
+    <div class="settings-field settings-wide">
+      <label for="settingAddress">Address</label>
+      <input id="settingAddress" placeholder="গৈলা, আগৈলঝাড়া, বরিশাল">
+    </div>
+    <div class="settings-field">
+      <label for="settingFacebook">Facebook</label>
+      <input id="settingFacebook" placeholder="https://facebook.com/...">
+    </div>
+    <div class="settings-field">
+      <label for="settingYoutube">YouTube</label>
+      <input id="settingYoutube" placeholder="https://youtube.com/...">
+    </div>
+    <div class="settings-field settings-wide">
+      <label for="settingWhatsapp">WhatsApp</label>
+      <input id="settingWhatsapp" placeholder="8801XXXXXXXXX অথবা https://wa.me/...">
+    </div>
+
+    <div class="settings-field settings-wide">
+      <label for="settingSiteUrl">Website URL / Canonical URL</label>
+      <input id="settingSiteUrl" type="url" placeholder="https://voiceofgoila.github.io/">
+    </div>
+    <div class="settings-field settings-wide">
+      <label for="settingSeoDescription">SEO / Share Description</label>
+      <textarea id="settingSeoDescription" maxlength="300" placeholder="গৈলা ইউনিয়নের তথ্য, প্রয়োজনীয় সেবা ও গুরুত্বপূর্ণ স্থানীয় তথ্য।" style="min-height:90px"></textarea>
+    </div>
+    <div class="settings-field settings-wide">
+      <label for="settingSocialShareImageUrl">Social Share Image URL</label>
+      <input id="settingSocialShareImageUrl" type="url" placeholder="Media Library থেকে Copy URL দিন">
+      <div class="settings-help">Facebook/WhatsApp/LinkedIn preview-এর জন্য 1200×630 অনুপাতের image ভালো।</div>
+    </div>
+    <div class="settings-field settings-wide">
+      <label for="settingDeveloperCreditLabel">Developer Credit Label</label>
+      <input id="settingDeveloperCreditLabel" placeholder="Site Developed & Maintained by">
+    </div>
+    <div class="settings-field">
+      <label for="settingDeveloperName">Developer Name</label>
+      <input id="settingDeveloperName" placeholder="Shawan Sarder Solyman">
+    </div>
+    <div class="settings-field">
+      <label for="settingDeveloperProfileLink">Developer Profile Link</label>
+      <input id="settingDeveloperProfileLink" type="url" placeholder="https://www.facebook.com/ShawanSarderSolyman">
+      <div class="settings-help">Link খালি রাখলে নাম দেখা যাবে, কিন্তু clickable হবে না।</div>
+    </div>
+    <div class="settings-field settings-wide">
+      <label for="settingDeveloperSubtitle">Developer Subtitle</label>
+      <input id="settingDeveloperSubtitle" placeholder="Innovator at Medical Assistant Robot">
+    </div>
+    <div class="settings-field settings-wide">
+      <label for="settingFooterRightsText">Footer Rights Text</label>
+      <input id="settingFooterRightsText" placeholder="© Voice of Goila · All Rights Reserved">
+      <div class="settings-help">যে field খালি রাখবেন, Public footer-এ সেই line hide থাকবে।</div>
+    </div>
+  </div>
+
+  <div class="settings-assets">
+    <div class="settings-asset">
+      <div style="font-weight:700;margin-bottom:8px;">Website Logo</div>
+      <label class="file-label" for="settingLogoFile">📷 Choose Logo
+        <input id="settingLogoFile" type="file" accept="image/*" onchange="previewWebsiteAsset(event,'websiteLogoPreview')">
+      </label>
+      <img id="websiteLogoPreview" class="settings-preview" alt="Current website logo preview">
+      <div class="settings-help">নতুন file না দিলে বর্তমান logo অপরিবর্তিত থাকবে।</div>
+    </div>
+    <div class="settings-asset">
+      <div style="font-weight:700;margin-bottom:8px;">Favicon</div>
+      <label class="file-label" for="settingFaviconFile">🖼️ Choose Favicon
+        <input id="settingFaviconFile" type="file" accept="image/*" onchange="previewWebsiteAsset(event,'websiteFaviconPreview')">
+      </label>
+      <img id="websiteFaviconPreview" class="settings-preview" alt="Current favicon preview">
+      <div class="settings-help">Square PNG/WebP image ব্যবহার করলে ভালো দেখাবে।</div>
+    </div>
+  </div>
+
+  <div class="settings-actions">
+    <button onclick="saveWebsiteSettings()">Save Website Settings</button>
+    <span id="websiteSettingsStatus" class="settings-status"></span>
+  </div>
+</div>
+
+
+<!-- HOMEPAGE CMS -->
+<div class="card" id="homepageCmsManagement">
+  <h2>Homepage CMS</h2>
+  <p class="cms-note">Homepage-এর মূল লেখা এখান থেকে পরিবর্তন করুন। Save করলে Public Website Supabase থেকে automatic update নেবে। Existing design/layout অপরিবর্তিত থাকবে।</p>
+  <div class="p3-grid">
+    <div class="p3-field p3-wide"><label>Top Badge</label><input id="homeBadgeInput" placeholder="গৈলা ইউনিয়ন • ডিজিটাল তথ্য প্ল্যাটফর্ম"></div>
+    <div class="p3-field"><label>Hero Lead Text</label><input id="homeHeroLeadInput" placeholder="গৈলার প্রয়োজনীয়"></div>
+    <div class="p3-field"><label>Hero Highlight</label><input id="homeHeroHighlightInput" placeholder="তথ্য ও সেবা"></div>
+    <div class="p3-field p3-wide"><label>Hero Second Line</label><input id="homeHeroTailInput" placeholder="এখন এক জায়গায়"></div>
+    <div class="p3-field p3-wide"><label>Hero Description</label><textarea id="homeHeroDescriptionInput"></textarea></div>
+    <div class="p3-field p3-wide"><label>Search Placeholder</label><input id="homeSearchPlaceholderInput"></div>
+    <div class="p3-field"><label>Category Section Title</label><input id="homeCategoryTitleInput"></div>
+    <div class="p3-field"><label>Category Section Subtitle</label><input id="homeCategorySubtitleInput"></div>
+    <div class="p3-field"><label>Emergency Section Title</label><input id="homeEmergencyTitleInput"></div>
+    <div class="p3-field"><label>Emergency Section Subtitle</label><input id="homeEmergencySubtitleInput"></div>
+    <div class="p3-field"><label>Announcement Section Title</label><input id="homeAnnouncementTitleInput"></div>
+    <div class="p3-field"><label>Announcement Section Subtitle</label><input id="homeAnnouncementSubtitleInput"></div>
+    <div class="p3-field"><label>Submit Section Title</label><input id="homeSubmitTitleInput"></div>
+    <div class="p3-field"><label>Submit Section Subtitle</label><input id="homeSubmitSubtitleInput"></div>
+    <div class="p3-field p3-wide"><label>Submit Section Description</label><textarea id="homeSubmitBodyInput"></textarea></div>
+    <div class="p3-field p3-wide"><label>Submit Button Text</label><input id="homeSubmitButtonInput"></div>
+  </div>
+  <div class="settings-actions">
+    <button onclick="saveHomepageContent()">Save Homepage</button>
+    <button class="btn-secondary" onclick="resetHomepageFormToDefaults()">Load Default Text</button>
+    <span id="homepageCmsStatus" class="p3-status"></span>
+  </div>
+</div>
+
+<!-- ANNOUNCEMENTS MANAGEMENT -->
+<div class="card" id="announcementManagement">
+  <h2>Announcements</h2>
+  <p class="cms-note">Add/Edit/Delete এবং Show/Hide করুন। শুধু Active announcement Public Website-এর “গুরুত্বপূর্ণ ঘোষণা” section-এ দেখা যাবে।</p>
+  <div class="announcement-form">
+    <input id="announcementDate" placeholder="Date label (যেমন: ১৯ আগস্ট ২০২৬)">
+    <input id="announcementTitle" placeholder="Announcement title *">
+    <textarea id="announcementBody" placeholder="বিস্তারিত লিখুন"></textarea>
+    <input id="announcementLink" placeholder="Optional link (https://...)">
+    <div class="announcement-options">
+      <label>Sort Order <input id="announcementSort" type="number" value="100" style="width:100px;margin:0"></label>
+      <label><input id="announcementActive" type="checkbox" checked> Active / Show</label>
+      <label><input id="announcementNotify" type="checkbox" checked> 🔔 Notification পাঠাবেন</label>
+    </div>
+    <button onclick="addAnnouncement()">+ Add Announcement</button>
+  </div>
+  <div id="announcementAdminList" class="announcement-list">Loading...</div>
+</div>
+
+<!-- ADS MANAGEMENT -->
+<div class="card" id="adsManagement">
+  <h2>Ads Management</h2>
+  <p class="cms-note">Popup ও Inline advertisement Supabase থেকে নিয়ন্ত্রণ করুন। একই position-এ একসাথে একটি Active ad রাখা হবে। ২৪ ঘণ্টার show limit ও display seconds প্রতিটি ad-এর জন্য আলাদা সেট করা যাবে। Image public <b>image</b> bucket-এ upload হবে।</p>
+
+  <div class="adm-ad-form">
+    <div class="adm-ad-field">
+      <label>Ad Title</label>
+      <input id="adTitle" placeholder="যেমন: Local Business Promotion">
+    </div>
+    <div class="adm-ad-field">
+      <label>Position</label>
+      <select id="adPosition">
+        <option value="popup">Popup</option>
+        <option value="inline">Inline Banner</option>
+      </select>
+    </div>
+    <div class="adm-ad-field">
+      <label>24h Show Limit</label>
+      <input id="adViews24h" type="number" min="1" max="100" value="1" inputmode="numeric">
+      <div class="settings-help">প্রতি browser/device-এ ২৪ ঘণ্টায় সর্বোচ্চ কতবার দেখাবে।</div>
+    </div>
+    <div class="adm-ad-field">
+      <label>Display Seconds</label>
+      <input id="adDuration" type="number" min="3" max="300" value="8" inputmode="numeric">
+      <div class="settings-help">কত সেকেন্ড পর Popup/Inline নিজে থেকে বন্ধ হবে।</div>
+    </div>
+    <div class="adm-ad-field wide">
+      <label>Click Link (optional)</label>
+      <input id="adLink" placeholder="https://example.com">
+    </div>
+    <div class="adm-ad-upload wide">
+      <label class="file-label" for="adImageFile">📷 Choose Ad Image
+        <input id="adImageFile" type="file" accept="image/*" onchange="previewAdminAdImage(event,'adImagePreview')">
+      </label>
+      <img id="adImagePreview" class="adm-ad-preview" alt="Ad preview">
+      <div class="settings-help">Popup-এর জন্য square/portrait এবং Inline-এর জন্য wide banner image ভালো দেখাবে। Max 5 MB.</div>
+    </div>
+    <div class="adm-ad-options wide">
+      <label><input id="adStatus" type="checkbox" checked> Active / Show</label>
+      <button onclick="addAd()" style="width:auto;margin:0">+ Add Ad</button>
+      <span id="adsStatus" class="settings-status"></span>
+    </div>
+  </div>
+
+  <div id="adsAdminList" class="adm-ad-list">Loading...</div>
+</div>
+
+
+
+
+<!-- NOTICES CMS -->
+<div class="card" id="noticesManagement">
+  <div class="ce-head">
+    <div><h2>Notices</h2><p class="cms-note">Announcements-এর বাইরে image সহ সাধারণ Notice/Update প্রকাশ করুন।</p></div>
+    <button class="ce-primary" onclick="loadNoticesAdmin()">Refresh</button>
+  </div>
+  <div class="ce-grid">
+    <div class="ce-field full"><label>Title</label><input id="noticeNewTitle" maxlength="160" placeholder="নোটিশের শিরোনাম"></div>
+    <div class="ce-field full"><label>Description</label><textarea id="noticeNewDescription" maxlength="1200" style="min-height:100px" placeholder="নোটিশের বিস্তারিত"></textarea></div>
+    <div class="ce-field"><label>Image (optional)</label><input id="noticeNewImage" type="file" accept="image/*" onchange="previewNoticeNewImage(event)"><img id="noticeNewPreview" class="ce-preview" alt="Notice preview"></div>
+    <div class="ce-field"><label>Status</label><select id="noticeNewStatus"><option value="true">Show / Active</option><option value="false">Hide / Inactive</option></select></div>
+  </div>
+  <div class="ce-checks"><label><input id="noticeNewNotify" type="checkbox" checked> 🔔 Notification পাঠাবেন</label></div>
+  <button class="ce-primary" onclick="addNotice()">+ Add Notice</button>
+  <div id="noticesAdminStatus" class="ce-notice-status"></div>
+  <div id="noticesAdminList">Loading...</div>
+</div>
+
+<!-- EMERGENCY NUMBERS MANAGEMENT -->
+<div class="card" id="emergencyManagement">
+  <h2>Emergency Numbers</h2>
+  <p class="cms-note">জরুরি নম্বর Add/Edit/Delete এবং Show/Hide করুন। শুধু Active নম্বর Public Website-এর জরুরি সেবা section ও quick menu-তে দেখা যাবে।</p>
+  <div class="p5-grid">
+    <div class="p5-field"><label>Icon / Emoji</label><input id="emergencyIcon" value="☎️" maxlength="10" placeholder="☎️"></div>
+    <div class="p5-field"><label>Name *</label><input id="emergencyName" placeholder="যেমন: জাতীয় জরুরি সেবা"></div>
+    <div class="p5-field p5-wide"><label>Note</label><input id="emergencyNote" placeholder="যেমন: পুলিশ • ফায়ার • অ্যাম্বুলেন্স"></div>
+    <div class="p5-field"><label>Phone *</label><input id="emergencyPhone" placeholder="999" inputmode="tel"></div>
+    <div class="p5-field"><label>Sort Order</label><input id="emergencySort" type="number" value="100"></div>
+  </div>
+  <div class="p5-options">
+    <label><input id="emergencyActive" type="checkbox" checked> Active / Show</label>
+    <label><input id="emergencyNotify" type="checkbox" checked> 🔔 Notification পাঠাবেন</label>
+    <button onclick="addEmergencyNumber()" style="width:auto;margin:0">+ Add Emergency Number</button>
+    <span id="emergencyAdminStatus" class="settings-status"></span>
+  </div>
+  <div id="emergencyAdminList" class="p5-list">Loading...</div>
+</div>
+
+<!-- REVIEWS MANAGEMENT -->
+<div class="card" id="reviewsManagement">
+  <h2>Reviews Management</h2>
+  <p class="cms-note">Visitor review প্রথমে Pending থাকবে। Admin Approve করলে শুধু তখনই Public Website-এ দেখা যাবে এবং Average Rating-এ গণনা হবে।</p>
+  <div class="p5-filter">
+    <label for="reviewStatusFilter"><b>Status:</b></label>
+    <select id="reviewStatusFilter" onchange="renderReviewsAdmin()">
+      <option value="all">All</option>
+      <option value="pending" selected>Pending</option>
+      <option value="approved">Approved</option>
+      <option value="rejected">Rejected</option>
+    </select>
+    <button onclick="loadReviewsAdmin()" style="width:auto;margin:0">Refresh</button>
+    <span id="reviewsAdminStatus" class="settings-status"></span>
+  </div>
+  <div id="reviewsAdminList" class="p5-list">Loading...</div>
+</div>
+
+<!-- PENDING: hidden automatically when there are no pending submissions -->
+
+<div class="card" id="pendingSubmissionCard" style="display:none;">
+
+
+<h2>
+Pending Submission
+</h2>
+
+
+
+
+<div class="image-box">
+
+
+<label class="file-label">
+
+📷 Choose Image
+
+
+<input
+
+type="file"
+
+id="submissionImage"
+
+accept="image/*"
+
+onchange="previewImage(event)"
+
+>
+
+
+</label>
+
+
+
+<img
+
+id="imagePreview"
+
+class="image-preview"
+
+>
+
+
+
+</div>
+
+
+
+
+<div id="pending">
+
+Loading...
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- DIRECTORY -->
+
+
+<div class="card">
+
+
+<h2>
+Directory Management
+</h2>
+
+
+
+<div class="ce-directory-tools">
+<button class="ce-primary" onclick="openDirectoryAdd()">+ Add Directory Item</button>
+<input id="searchBox" placeholder="Search Directory...">
+</div>
+
+
+
+<div id="directory">
+
+Loading...
+
+</div>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+<!-- CATEGORY MANAGER EDIT MODAL -->
+<div id="categoryManagerModal" class="modal">
+<div class="modal-box">
+<div class="modal-header">
+<h2 id="categoryManagerTitle">Edit</h2>
+<button class="close-btn" onclick="closeCategoryManagerEdit()">×</button>
+</div>
+
+<input type="hidden" id="categoryManagerType">
+<input type="hidden" id="categoryManagerId">
+
+<div id="categoryManagerParentWrap" style="display:none;">
+<label>Parent Category</label>
+<select id="categoryManagerParent"></select>
+</div>
+
+<label>Name</label>
+<input id="categoryManagerName" placeholder="নাম লিখুন">
+
+<button onclick="saveCategoryManagerEdit()">Save Changes</button>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- EMERGENCY EDIT MODAL -->
+<div id="emergencyEditModal" class="modal">
+  <div class="modal-box">
+    <div class="modal-header"><h2>Edit Emergency Number</h2><button class="close-btn" onclick="closeEmergencyEdit()">✕</button></div>
+    <input id="emergencyEditId" type="hidden">
+    <label>Icon / Emoji</label><input id="emergencyEditIcon" maxlength="10">
+    <label>Name</label><input id="emergencyEditName">
+    <label>Note</label><input id="emergencyEditNote">
+    <label>Phone</label><input id="emergencyEditPhone" inputmode="tel">
+    <label>Sort Order</label><input id="emergencyEditSort" type="number">
+    <label style="display:flex;align-items:center;gap:8px;margin-top:12px;font-weight:700"><input id="emergencyEditActive" type="checkbox" style="width:auto;margin:0"> Active / Show</label>
+    <button onclick="saveEmergencyEdit()">Save Changes</button>
+  </div>
+</div>
+
+<!-- ANNOUNCEMENT EDIT MODAL -->
+<!-- ADS EDIT MODAL -->
+<div id="adEditModal" class="modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Edit Ad</h2>
+      <button class="close-btn" onclick="closeAdEdit()">✕</button>
+    </div>
+    <input id="adEditId" type="hidden">
+    <div class="adm-ad-field"><label>Title</label><input id="adEditTitle"></div>
+    <div class="adm-ad-field"><label>Position</label><select id="adEditPosition"><option value="popup">Popup</option><option value="inline">Inline Banner</option></select></div>
+    <div class="adm-ad-field"><label>24h Show Limit</label><input id="adEditViews24h" type="number" min="1" max="100" value="1" inputmode="numeric"><div class="settings-help">প্রতি browser/device-এ ২৪ ঘণ্টায় সর্বোচ্চ কতবার।</div></div>
+    <div class="adm-ad-field"><label>Display Seconds</label><input id="adEditDuration" type="number" min="3" max="300" value="8" inputmode="numeric"><div class="settings-help">Auto-close/hide সময়।</div></div>
+    <div class="adm-ad-field"><label>Click Link</label><input id="adEditLink" placeholder="https://..."></div>
+    <div class="adm-ad-upload">
+      <label class="file-label" for="adEditImageFile">📷 Change Image
+        <input id="adEditImageFile" type="file" accept="image/*" onchange="previewAdminAdImage(event,'adEditImagePreview')">
+      </label>
+      <img id="adEditImagePreview" class="adm-ad-preview" alt="Ad image preview">
+      <div class="settings-help">নতুন image না দিলে বর্তমান image থাকবে।</div>
+    </div>
+    <div class="adm-ad-options"><label><input id="adEditStatus" type="checkbox"> Active / Show</label></div>
+    <button onclick="saveAdEdit()">Save Ad</button>
+  </div>
+</div>
+
+<div id="announcementEditModal" class="modal">
+  <div class="modal-box">
+    <div class="modal-header"><h2>Edit Announcement</h2><button class="close-btn" onclick="closeAnnouncementEdit()">×</button></div>
+    <input type="hidden" id="announcementEditId">
+    <label>Date label</label><input id="announcementEditDate">
+    <label>Title</label><input id="announcementEditTitle">
+    <label>Body</label><textarea id="announcementEditBody" style="min-height:120px"></textarea>
+    <label>Link</label><input id="announcementEditLink">
+    <label>Sort Order</label><input id="announcementEditSort" type="number">
+    <label style="display:flex;align-items:center;gap:8px;margin-top:12px;font-weight:700"><input id="announcementEditActive" type="checkbox" style="width:auto;margin:0"> Active / Show</label>
+    <button onclick="saveAnnouncementEdit()">Save Changes</button>
+  </div>
+</div>
+
+
+<!-- DIRECTORY ADD MODAL -->
+<div id="directoryAddModal" class="modal">
+  <div class="modal-box">
+    <div class="modal-header"><h2>Add Directory Item</h2><button class="close-btn" onclick="closeDirectoryAdd()">✕</button></div>
+    <div class="ce-grid">
+      <div class="ce-field full"><label>Name *</label><input id="addDirName" maxlength="150"></div>
+      <div class="ce-field"><label>Category *</label><select id="addDirCat" onchange="changeAddSubCategory()"></select></div>
+      <div class="ce-field"><label>Subcategory</label><select id="addDirSubcat" onchange="updateDirectoryNotificationOption()"></select></div>
+      <div class="ce-field"><label>Phone</label><input id="addDirPhone" inputmode="tel"></div>
+      <div class="ce-field"><label>Sort Order</label><input id="addDirSort" type="number" value="0"></div>
+      <div class="ce-field full"><label>Address</label><input id="addDirAddress"></div>
+      <div class="ce-field full"><label>Google Maps URL</label><input id="addDirMap" type="url"></div>
+      <div class="ce-field full"><label>Description</label><textarea id="addDirDescription" style="min-height:100px"></textarea></div>
+      <div class="ce-field full"><label>Image</label><input id="addDirImage" type="file" accept="image/*" onchange="previewAddDirectoryImage(event)"><img id="addDirImagePreview" class="ce-preview" alt="Directory image preview"></div>
+    </div>
+    <div class="ce-checks"><label><input id="addDirActive" type="checkbox" checked> Active / Public</label><label><input id="addDirFeatured" type="checkbox"> ⭐ Featured / Pin</label></div>
+    <div id="addDirNotifyWrap" class="cms-note" style="display:none;margin:12px 0;border-left-color:#7e19b4;">
+      <label style="display:flex;align-items:center;gap:8px;font-weight:800;color:#4e1f6d;">
+        <input id="addDirNotify" type="checkbox" checked disabled style="width:auto;margin:0;">
+        🔔 Notification পাঠাবেন
+      </label>
+      <div id="addDirNotifyHelp" style="margin-top:5px;font-size:12px;color:#75677d;">Supported category নির্বাচন করলে notification text নিজে তৈরি হবে।</div>
+    </div>
+    <button onclick="saveNewDirectoryItem()">Save Directory Item</button>
+  </div>
+</div>
+
+<!-- NOTICE EDIT MODAL -->
+<div id="noticeEditModal" class="modal">
+  <div class="modal-box">
+    <div class="modal-header"><h2>Edit Notice</h2><button class="close-btn" onclick="closeNoticeEdit()">✕</button></div>
+    <input id="noticeEditId" type="hidden">
+    <label>Title</label><input id="noticeEditTitle" maxlength="160">
+    <label>Description</label><textarea id="noticeEditDescription" maxlength="1200" style="min-height:120px"></textarea>
+    <label style="margin-top:10px">Change Image (optional)</label><input id="noticeEditImage" type="file" accept="image/*" onchange="previewNoticeEditImage(event)">
+    <img id="noticeEditPreview" class="ce-preview" alt="Notice preview">
+    <div class="ce-checks"><label><input id="noticeEditRemoveImage" type="checkbox"> Remove current image</label><label><input id="noticeEditStatus" type="checkbox"> Active / Show</label></div>
+    <button onclick="saveNoticeEdit()">Save Changes</button>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+
+
+<div id="editModal" class="modal">
+
+
+<div class="modal-box">
+
+
+<div class="modal-header">
+
+
+<h2>
+Edit Information
+</h2>
+
+
+
+<button
+
+class="close-btn"
+
+onclick="closeEditModal()">
+
+✕
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+<input
+
+id="editId"
+
+type="hidden"
+
+>
+
+
+
+
+<input
+
+id="editName"
+
+placeholder="Name"
+
+>
+
+
+
+
+<select
+
+id="editCat"
+
+onchange="changeSubCategory()">
+
+</select>
+
+
+
+
+
+<select
+
+id="editSubcat">
+
+</select>
+
+
+
+
+
+<input
+
+id="editPhone"
+
+placeholder="Phone"
+
+>
+
+
+
+
+<textarea
+
+id="editAddress"
+
+placeholder="Address">
+
+</textarea>
+
+
+
+
+
+<input
+
+id="editMap"
+
+placeholder="Map URL"
+
+>
+
+
+
+
+<textarea
+
+id="editDescription"
+
+placeholder="Description">
+
+</textarea>
+
+<div class="ce-grid">
+  <div class="ce-field"><label>Sort Order</label><input id="editSortOrder" type="number" value="0"></div>
+  <div class="ce-field"><label>Visibility</label><select id="editActive"><option value="true">Active / Public</option><option value="false">Hidden</option></select></div>
+</div>
+<div class="ce-checks"><label><input id="editFeatured" type="checkbox"> ⭐ Featured / Pin</label></div>
+
+
+
+
+
+
+
+
+<div class="image-box">
+
+
+
+<label class="file-label">
+
+📷 Change Image
+
+
+
+<input
+
+type="file"
+
+id="editImage"
+
+accept="image/*"
+
+onchange="showEditImage(event)"
+
+>
+
+
+</label>
+
+
+
+<p id="editImageName">
+
+No image selected
+
+</p>
+
+<div class="edit-image-actions">
+<button type="button" id="removeEditImageBtn" class="edit-image-remove" onclick="removeDirectoryEditImage()">🗑️ Remove Image</button>
+</div>
+
+
+<img
+
+id="editImagePreview"
+
+class="image-preview"
+
+>
+
+
+
+</div>
+
+
+
+
+
+
+
+<button onclick="updateDirectory()">
+
+Save Changes
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<script src="js/supabase.js"></script>
+
+<script src="js/admin.js?v=20260826-notify-expansion-1"></script>
+
+
+
+<script>
+function togglePassword(){
+  const pass=document.getElementById("password");
+  if(pass) pass.type=pass.type==="password"?"text":"password";
+}
+</script>
+
+
+
+</div>
+
+
+</body>
+
+  </html>
