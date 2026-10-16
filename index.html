@@ -673,6 +673,16 @@ body:not(.vog-category-view) #categories .cat small{
 #emergencyGrid .em{padding:14px 16px!important}
 @media(max-width:360px){#emergencyGrid .em a.vog-em-call,.menu-em-item a.vog-em-call{padding:8px 9px!important;font-size:12px!important}}
 </style>
+
+<style id="vog40-emergency-inline">
+/* Compact single-row emergency actions, no extra share row. */
+#emergencyGrid .em .vog-em-actions,.menu-em-item .vog-em-actions{display:grid!important;grid-template-columns:minmax(0,1fr) auto auto!important;gap:7px!important;align-items:center!important;margin-top:9px!important}
+#emergencyGrid .em .vog-em-number,.menu-em-item .vog-em-number{grid-column:1!important;grid-row:1!important;min-width:0!important;font-size:clamp(15px,3.6vw,19px)!important;white-space:nowrap!important}
+#emergencyGrid .em button.vog-em-share,.menu-em-item button.vog-em-share{grid-column:2!important;grid-row:1!important;justify-self:end!important;min-height:37px!important;padding:7px 10px!important;border-radius:11px!important;font-size:12px!important;white-space:nowrap!important}
+#emergencyGrid .em a.vog-em-call,.menu-em-item a.vog-em-call{grid-column:3!important;grid-row:1!important;min-height:37px!important;padding:7px 11px!important;border-radius:11px!important;font-size:12px!important;white-space:nowrap!important}
+#emergencyGrid .em{padding:13px 14px!important}
+@media(max-width:390px){#emergencyGrid .em .vog-em-actions{gap:5px!important}#emergencyGrid .em button.vog-em-share{padding:7px 7px!important;font-size:11px!important}#emergencyGrid .em a.vog-em-call{padding:7px 8px!important;font-size:11px!important}}
+</style>
 </head>
 <body>
 
