@@ -498,6 +498,90 @@ body:not(.vog-category-view) #categories .cat small{color:var(--card-ink)!import
 @media(hover:hover) and (prefers-reduced-motion:no-preference){body:not(.vog-category-view) #categories .cat:hover{transform:translateY(-3px)!important;box-shadow:0 9px 22px rgba(48,22,69,.12)!important}}
 @media(prefers-reduced-motion:reduce){body:not(.vog-category-view) #categories .cat{animation:none!important;transition:none!important}}
 </style>
+<style id="vog33-minimal-premium-cards">
+/* Deliberately lightweight: clear icon tile, distinct pastel surfaces, no large circles. */
+body:not(.vog-category-view) #categories .cat{
+ --card-tint:#f1e8fc;--card-line:#dcc5ee;--card-ink:#6b2c91;
+ background:linear-gradient(140deg,#fff 5%,var(--card-tint) 100%)!important;
+ border:1px solid var(--card-line)!important;border-radius:21px!important;
+ box-shadow:0 6px 17px rgba(44,24,62,.085)!important;
+ position:relative!important;isolation:isolate;overflow:hidden!important;
+ padding:17px 14px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+ min-height:136px!important;
+}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+2){--card-tint:#fff2e1;--card-line:#f0d9b8;--card-ink:#9b5d18}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+3){--card-tint:#ffebf2;--card-line:#f1cada;--card-ink:#ae3967}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+4){--card-tint:#e9f4ff;--card-line:#c8dff4;--card-ink:#276b9d}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+5){--card-tint:#e7f8f3;--card-line:#bde5da;--card-ink:#227b6b}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+6){--card-tint:#f1eaff;--card-line:#dac9f3;--card-ink:#7151a5}
+/* Reset oversized decorations from previous releases. */
+body:not(.vog-category-view) #categories .cat::before{content:none!important;display:none!important}
+body:not(.vog-category-view) #categories .cat::after{
+ content:""!important;display:block!important;position:absolute!important;
+ width:68px!important;height:68px!important;right:-13px!important;bottom:-17px!important;left:auto!important;top:auto!important;
+ border:1.5px solid var(--card-ink)!important;border-radius:19px!important;
+ transform:rotate(-20deg)!important;opacity:.075!important;background:none!important;
+ box-shadow:-17px -13px 0 -8px var(--card-tint)!important;pointer-events:none!important;
+ animation:none!important;
+}
+body:not(.vog-category-view) #categories .cat .ico{
+ width:47px!important;height:47px!important;min-width:47px!important;
+ border-radius:15px!important;background:var(--card-tint)!important;
+ border:1px solid var(--card-line)!important;display:grid!important;place-items:center!important;
+ box-shadow:0 3px 9px rgba(44,24,62,.04)!important;
+ font-size:23px!important;margin:0 0 12px!important;position:relative!important;z-index:1!important;
+}
+body:not(.vog-category-view) #categories .cat b{font-size:13px!important;line-height:1.42!important;margin:0 0 5px!important;position:relative!important;z-index:1!important}
+body:not(.vog-category-view) #categories .cat small{font-size:11px!important;color:var(--card-ink)!important;position:relative!important;z-index:1!important;margin-top:auto!important}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){body:not(.vog-category-view) #categories .cat:hover{transform:translateY(-2px)!important;box-shadow:0 10px 22px rgba(44,24,62,.12)!important}}
+@media(prefers-reduced-motion:reduce){body:not(.vog-category-view) #categories .cat{animation:none!important;transition:none!important}}
+</style>
+
+<style id="vog34-distinct-premium-cards">
+/* Distinct visual hierarchy without extra images, network requests, or motion. */
+body:not(.vog-category-view) #categories .cat{
+ --card-tint:#e9d8ff;--card-line:#c9a9f3;--card-ink:#6427a6;--card-surface:#f4eaff;
+ background:linear-gradient(128deg,#fff 0%,var(--card-surface) 72%,var(--card-tint) 135%)!important;
+ border:1.5px solid var(--card-line)!important;
+ border-radius:22px!important;box-shadow:0 7px 19px rgba(48,25,65,.11)!important;
+ padding:16px 14px 15px!important;min-height:158px!important;
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+ position:relative!important;overflow:hidden!important;isolation:isolate!important;
+}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+2){--card-tint:#ffe1ac;--card-line:#edc788;--card-ink:#ad6917;--card-surface:#fff4df}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+3){--card-tint:#ffcadc;--card-line:#f1a9c5;--card-ink:#ba3365;--card-surface:#fff0f5}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+4){--card-tint:#c7e2ff;--card-line:#a8cdf1;--card-ink:#226fae;--card-surface:#edf6ff}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+5){--card-tint:#bcefe3;--card-line:#9ddacb;--card-ink:#167d6a;--card-surface:#ecfbf6}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+6){--card-tint:#dfcaff;--card-line:#cbb1ee;--card-ink:#7343b3;--card-surface:#f4edff}
+body:not(.vog-category-view) #categories .cat::before{display:none!important;content:none!important}
+body:not(.vog-category-view) #categories .cat::after{
+ content:attr(data-vog-icon)!important;display:block!important;position:absolute!important;
+ right:-3px!important;top:31px!important;left:auto!important;bottom:auto!important;
+ width:83px!important;height:83px!important;line-height:83px!important;text-align:center!important;
+ font-size:63px!important;opacity:.115!important;filter:saturate(.7)!important;
+ transform:rotate(-13deg)!important;border:0!important;border-radius:0!important;
+ background:none!important;box-shadow:none!important;pointer-events:none!important;
+ animation:none!important;z-index:0!important;
+}
+body:not(.vog-category-view) #categories .cat .ico{
+ width:50px!important;height:50px!important;min-width:50px!important;
+ border-radius:15px!important;background:var(--card-tint)!important;
+ border:1px solid var(--card-line)!important;box-shadow:0 4px 10px rgba(37,19,55,.075)!important;
+ display:grid!important;place-items:center!important;font-size:25px!important;
+ margin:0 0 16px!important;position:relative!important;z-index:1!important;
+}
+body:not(.vog-category-view) #categories .cat b{
+ font-size:13.5px!important;line-height:1.4!important;letter-spacing:0!important;
+ color:#24152e!important;margin:0 0 9px!important;position:relative!important;z-index:1!important;
+}
+body:not(.vog-category-view) #categories .cat small{
+ font-size:11.5px!important;font-weight:650!important;line-height:1.5!important;
+ color:var(--card-ink)!important;margin-top:auto!important;position:relative!important;z-index:1!important;
+}
+@media(max-width:420px){body:not(.vog-category-view) #categories .cat{padding:14px 12px!important;min-height:151px!important}body:not(.vog-category-view) #categories .cat b{font-size:12.5px!important}body:not(.vog-category-view) #categories .cat::after{font-size:54px!important;right:-10px!important}}
+@media(hover:hover){body:not(.vog-category-view) #categories .cat:hover{transform:translateY(-2px)!important;box-shadow:0 11px 23px rgba(48,25,65,.15)!important}}
+@media(prefers-reduced-motion:reduce){body:not(.vog-category-view) #categories .cat{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
 
@@ -580,7 +664,7 @@ function itemMatchesSubcategory(x,main,sub){
   return x.cat===main&&x.subcat===sub;
 }
 function categoryCount(slug){return slug==="news"?importantAnnouncements.length:data.filter(x=>itemMatchesCategory(x,slug)).length}
-function renderCats(){$("categories").innerHTML=visibleCategories().map(c=>`<div class="cat" onclick="openCategory('${c[2]}')"><div class="ico">${c[0]}</div><b>${c[1]}</b><small>${categoryCount(c[2])?categoryCount(c[2])+"টি তথ্য":"বিভাগ দেখুন"} →</small></div>`).join("")}
+function renderCats(){$("categories").innerHTML=visibleCategories().map(c=>`<div class="cat" data-vog-icon="${c[0]}" onclick="openCategory('${c[2]}')"><div class="ico">${c[0]}</div><b>${c[1]}</b><small>${categoryCount(c[2])?categoryCount(c[2])+"টি তথ্য":"বিভাগ দেখুন"} →</small></div>`).join("")}
 function renderMenu(){const cw=$("menuCategories"),ew=$("menuEmergency");cw.innerHTML=visibleCategories().map(c=>`<button class="menu-cat" onclick="openCategory('${c[2]}')"><i>${c[0]}</i><span>${c[1]}</span></button>`).join("");ew.innerHTML=emergencyNumbers.map(x=>`<div class="menu-em-item"><b>${x.icon} ${x.name}</b><small>${x.note}</small><a href="tel:${x.phone}">📞 ${x.phone}</a></div>`).join("")}
 function renderEmergency(){ $("emergencyGrid").innerHTML=emergencyNumbers.map(x=>`<div class="em"><b>${x.icon} ${x.name}</b><small>${x.note}</small><a href="tel:${x.phone}">📞 ${x.phone}</a></div>`).join("") }
 function openCategory(slug){if(!location.pathname.endsWith("category.html")){location.href="category.html?section="+encodeURIComponent(slug);return;}closeSideMenu();if(slug==="news"){if(importantAnnouncements.length)$("announcementSection").scrollIntoView({behavior:"smooth",block:"start"});return}if(slug==="map"){window.open("https://www.google.com/maps/search/Goila+Union,+Agailjhara,+Barishal","_blank","noopener");return}if(slug==="emergency"){showEmergencyModal();return}const direct=["police","fire","ambulance","doctor","electricity","places"];if(direct.includes(slug)){showCategoryModal(slug,catInfo(slug)[0]+" "+catInfo(slug)[1]);return}const list=subcategories[slug]||[];if(list.length){showSubcategories(slug);return}showCategoryModal(slug,catInfo(slug)[0]+" "+catInfo(slug)[1])}
