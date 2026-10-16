@@ -382,6 +382,13 @@ body:not(.vog-category-view) #categories .cat{animation:vog27-card .7s cubic-bez
 @media(prefers-reduced-motion:reduce){body:not(.vog-category-view) .hero .hero-grid,body:not(.vog-category-view) .hero .badge,body:not(.vog-category-view) .hero h2,body:not(.vog-category-view) .hero p,body:not(.vog-category-view) .hero .search-wrap,body:not(.vog-category-view) #categories .cat,.vog27-reveal.vog27-in,.search button,#homeSubmitButton,.search button::after,#homeSubmitButton::after{animation:none!important;opacity:1!important;transform:none!important}}
 
 </style>
+<style id="vog-search-outline-fix">
+/* Keep the focus border on the outer white pill, never on the text field. */
+.search-wrap .search{border-radius:18px!important;overflow:hidden;box-sizing:border-box;border:1px solid rgba(107,44,145,.17)!important;background:#fff!important;outline:none!important;}
+.search-wrap .search:focus-within{border-color:#8d5caa!important;outline:none!important;box-shadow:0 3px 14px rgba(107,44,145,.10)!important;}
+.search-wrap .search input,.search-wrap .search input:focus,.search-wrap .search input:focus-visible{border:0!important;outline:none!important;box-shadow:none!important;border-radius:0!important;background:transparent!important;min-width:0!important;appearance:none!important;-webkit-appearance:none!important;}
+.search-wrap .search button{border-radius:13px!important;flex-shrink:0;}
+</style>
 </head>
 <body>
 
