@@ -408,7 +408,21 @@ body:not(.vog-category-view) .hero .hero-card{animation:vog28-appear .9s .48s cu
 }
 @media(prefers-reduced-motion:reduce){.search button::after,#homeSubmitButton::after,body:not(.vog-category-view) .hero .hero-card{animation:none!important;opacity:1!important;transform:none!important}}
 </style>
-</head>
+<script id="vog29-return-boot">try{if(sessionStorage.getItem('vog29-home-return')==='1'){sessionStorage.removeItem('vog29-home-return');document.documentElement.classList.add('vog29-return-home')}}catch(e){}</script><style id="vog29-return-style">html.vog29-return-home #vogFreshBoot .vog-fresh-loader{display:none!important}html.vog29-return-home #vogFreshBoot{background:#faf7fc!important}</style><style id="vog29-button-sweep">
+/* Move the highlight by its left edge, avoiding old transform-based animation conflicts. */
+@keyframes vog29-moving-shine{0%,12%{left:-48%;opacity:0}16%{opacity:1}43%{left:115%;opacity:1}44%,100%{left:115%;opacity:0}}
+body:not(.vog-category-view) .search button::after,
+body:not(.vog-category-view) #homeSubmitButton::after{
+ content:""!important;display:block!important;position:absolute!important;
+ top:0!important;bottom:0!important;left:-48%;right:auto!important;
+ width:45%!important;height:100%!important;inset:auto!important;
+ background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.05) 20%,rgba(255,255,255,.48) 50%,rgba(255,255,255,.05) 80%,transparent 100%)!important;
+ transform:none!important;pointer-events:none!important;z-index:1!important;
+ animation:vog29-moving-shine 5.2s linear infinite!important;
+}
+body:not(.vog-category-view) #homeSubmitButton::after{animation-delay:-2.6s!important}
+@media(prefers-reduced-motion:reduce){body:not(.vog-category-view) .search button::after,body:not(.vog-category-view) #homeSubmitButton::after{animation:none!important;opacity:0!important}}
+</style></head>
 <body>
 
 <div id="vogBrowserAppPrompt" role="dialog" aria-label="Voice of Goila অ্যাপ ডাউনলোড">
