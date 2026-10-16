@@ -663,6 +663,16 @@ body:not(.vog-category-view) #categories .cat small{
 @media(prefers-reduced-motion:reduce){.vog-category-hero .container>*,.vog-category-view .subcategory-grid .subcat{animation:none!important;transition:none!important}}
 @media(max-width:420px){.menu-cat{min-height:90px!important}.vog-category-view .subcategory-grid .subcat{min-height:116px!important;padding:18px 12px!important}}
 </style>
+
+<style id="vog39-emergency-layout">
+/* Compact, predictable actions: phone left, call right, share below */
+#emergencyGrid .em .vog-em-actions, .menu-em-item .vog-em-actions {display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;column-gap:12px!important;row-gap:8px!important;align-items:center!important;margin-top:12px!important}
+#emergencyGrid .em .vog-em-number,.menu-em-item .vog-em-number{grid-column:1!important;grid-row:1!important;font-size:17px!important}
+#emergencyGrid .em a.vog-em-call,.menu-em-item a.vog-em-call{grid-column:2!important;grid-row:1!important;display:inline-flex!important;background:#e6f7ed!important;color:#17683c!important;border:1px solid #bde5ce!important;border-radius:12px!important;min-height:40px!important;padding:8px 14px!important;font-size:13px!important;font-weight:800!important;box-shadow:none!important;white-space:nowrap!important}
+#emergencyGrid .em button.vog-em-share,.menu-em-item button.vog-em-share{grid-column:1/-1!important;grid-row:2!important;justify-self:start!important;background:#f8f3fb!important;color:#693482!important;border:1px solid #e4d8ed!important;border-radius:10px!important;padding:7px 12px!important;margin:0!important;min-height:34px!important;font-size:12px!important;box-shadow:none!important}
+#emergencyGrid .em{padding:14px 16px!important}
+@media(max-width:360px){#emergencyGrid .em a.vog-em-call,.menu-em-item a.vog-em-call{padding:8px 9px!important;font-size:12px!important}}
+</style>
 </head>
 <body>
 
