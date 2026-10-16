@@ -582,6 +582,42 @@ body:not(.vog-category-view) #categories .cat small{
 @media(hover:hover){body:not(.vog-category-view) #categories .cat:hover{transform:translateY(-2px)!important;box-shadow:0 11px 23px rgba(48,25,65,.15)!important}}
 @media(prefers-reduced-motion:reduce){body:not(.vog-category-view) #categories .cat{animation:none!important;transition:none!important}}
 </style>
+<style id="vog35-soft-premium-cards">
+/* Light-touch redesign: no large watermark emoji, no heavy gradients, no new assets. */
+body:not(.vog-category-view) #categories .cat{
+ --card-tint:#f5effc;--card-line:#e6d9f0;--card-ink:#70448d;
+ background:linear-gradient(145deg,#fff 12%,var(--card-tint) 100%)!important;
+ border:1px solid var(--card-line)!important;
+ border-radius:20px!important;
+ box-shadow:0 5px 15px rgba(51,27,66,.065)!important;
+ min-height:145px!important;padding:15px 13px!important;
+ gap:0!important;
+}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+2){--card-tint:#fff9ed;--card-line:#f1e6d3;--card-ink:#976c39}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+3){--card-tint:#fff3f7;--card-line:#f1dce5;--card-ink:#ad5677}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+4){--card-tint:#f0f7ff;--card-line:#dceaf6;--card-ink:#4b7b9e}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+5){--card-tint:#f0faf7;--card-line:#d6ebe5;--card-ink:#3e8979}
+body:not(.vog-category-view) #categories .cat:nth-child(6n+6){--card-tint:#f6f1fd;--card-line:#e7dbf4;--card-ink:#8062a3}
+body:not(.vog-category-view) #categories .cat::before,
+body:not(.vog-category-view) #categories .cat::after{
+ content:none!important;display:none!important;
+}
+body:not(.vog-category-view) #categories .cat .ico{
+ width:45px!important;height:45px!important;min-width:45px!important;
+ font-size:23px!important;border-radius:14px!important;
+ background:color-mix(in srgb,var(--card-tint) 86%,var(--card-ink) 14%)!important;
+ border:1px solid var(--card-line)!important;
+ box-shadow:none!important;margin:0 0 12px!important;
+}
+body:not(.vog-category-view) #categories .cat b{
+ font-size:13px!important;line-height:1.45!important;margin:0 0 8px!important;
+}
+body:not(.vog-category-view) #categories .cat small{
+ font-size:11px!important;font-weight:550!important;color:var(--card-ink)!important;
+}
+@media(max-width:420px){body:not(.vog-category-view) #categories .cat{min-height:140px!important;padding:13px 11px!important}}
+@media(hover:hover){body:not(.vog-category-view) #categories .cat:hover{box-shadow:0 9px 20px rgba(51,27,66,.095)!important}}
+</style>
 </head>
 <body>
 
