@@ -413,6 +413,43 @@ body:not(.vog-category-view) #categories .cat{animation:vog27-card .7s cubic-bez
 @media(prefers-reduced-motion:reduce){body:not(.vog-category-view) .hero .hero-grid,body:not(.vog-category-view) .hero .badge,body:not(.vog-category-view) .hero h2,body:not(.vog-category-view) .hero p,body:not(.vog-category-view) .hero .search-wrap,body:not(.vog-category-view) #categories .cat,.vog27-reveal.vog27-in,.search button,#homeSubmitButton,.search button::after,#homeSubmitButton::after{animation:none!important;opacity:1!important;transform:none!important}}
 
 </style>
+<style id="vog36-refined-ui">
+/* V3.6: lightweight, consistent surfaces; no image or font downloads */
+.side-menu{width:min(92vw,390px)!important;padding:20px 17px!important;background:linear-gradient(155deg,#fff 0%,#faf7fd 100%)!important;box-shadow:-15px 0 45px rgba(34,12,49,.19)!important;transition:transform .34s cubic-bezier(.2,.75,.2,1)!important}
+.side-menu-head{padding:8px 4px 17px!important;border-bottom:1px solid #ece4f0!important;margin-bottom:10px!important}
+.side-menu-title{font-size:22px!important;color:#351a43!important;letter-spacing:-.3px}
+.side-menu-close{border-radius:15px!important;background:#f5eef9!important;color:#572574!important;border:1px solid #e9dcee!important}
+.side-menu-body{overscroll-behavior:contain;scrollbar-width:thin}
+.menu-group h4{color:#6b2c91!important;font-size:15px!important;margin:12px 0!important}
+.menu-cats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+.menu-cat{min-width:0!important;min-height:95px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:8px!important;text-align:left!important;padding:12px!important;background:#fff!important;border:1px solid #e9e0ee!important;border-radius:17px!important;box-shadow:0 4px 13px rgba(62,27,82,.035)!important;color:#321b3d!important;font-size:13px!important;line-height:1.35!important;white-space:normal!important;transition:transform .22s ease,background .22s ease,box-shadow .22s ease!important}
+.menu-cat i{width:36px!important;height:36px!important;display:grid!important;place-items:center!important;border-radius:11px!important;background:#f3e9f9!important;font-style:normal!important;font-size:20px!important;flex:none!important}
+.menu-cat span{white-space:normal!important;overflow-wrap:anywhere!important;font-weight:750!important}
+.menu-cat:nth-child(4n+2) i{background:#fff1dc!important}.menu-cat:nth-child(4n+3) i{background:#fce9f0!important}.menu-cat:nth-child(4n) i{background:#eaf4ff!important}
+.menu-cat:active{transform:scale(.955)!important;background:#f8f0fd!important}
+.vog-category-hero{position:relative;overflow:hidden;background:linear-gradient(118deg,#552070 0%,#713194 60%,#642983 100%)!important;padding:36px 0 40px!important}
+.vog-category-hero:after{content:"";position:absolute;right:-90px;top:-110px;width:260px;height:260px;border:1px solid rgba(255,255,255,.12);border-radius:50%;pointer-events:none}
+.vog-category-hero .container{position:relative;z-index:1}
+.vog-category-hero h1{font-size:clamp(25px,5.2vw,38px)!important;line-height:1.4!important;letter-spacing:-.5px;margin:19px 0 10px!important;max-width:750px}
+.vog-category-hero p{font-size:15px!important;opacity:.88}
+.vog-back-top{display:inline-flex!important;align-items:center;max-width:100%;padding:10px 17px!important;border-radius:99px!important;background:rgba(255,255,255,.11)!important;border:1px solid rgba(255,255,255,.22)!important;font-size:14px!important;text-decoration:none!important}
+.vog-category-view .subcategory-grid{gap:12px!important}
+.vog-category-view .subcategory-grid .subcat{min-height:123px!important;padding:20px 13px!important;align-items:flex-start!important;text-align:left!important;justify-content:flex-end!important;gap:8px!important;border-radius:21px!important;background:linear-gradient(145deg,#fff 0%,#f8f2fc 100%)!important;border:1px solid #e4d5ed!important;box-shadow:0 6px 18px rgba(73,30,93,.055)!important;position:relative;isolation:isolate;overflow:hidden;text-decoration:none!important;color:#291732!important;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,border-color .3s ease!important}
+.vog-category-view .subcategory-grid .subcat:nth-child(4n+2){background:linear-gradient(145deg,#fff,#fff8ed)!important;border-color:#efe1c9!important}
+.vog-category-view .subcategory-grid .subcat:nth-child(4n+3){background:linear-gradient(145deg,#fff,#fdf1f6)!important;border-color:#eedbe5!important}
+.vog-category-view .subcategory-grid .subcat:nth-child(4n){background:linear-gradient(145deg,#fff,#f0f7fd)!important;border-color:#d9e6f0!important}
+.vog-category-view .subcategory-grid .subcat:before{content:""!important;position:absolute!important;top:16px!important;left:15px!important;width:26px!important;height:4px!important;border-radius:20px!important;background:#b58aca!important;opacity:.55!important;inset:auto!important;top:16px!important;left:15px!important;display:block!important}
+.vog-category-view .subcategory-grid .subcat:nth-child(4n+2):before{background:#e6ba72!important}.vog-category-view .subcategory-grid .subcat:nth-child(4n+3):before{background:#e7a5c2!important}.vog-category-view .subcategory-grid .subcat:nth-child(4n):before{background:#93bfdf!important}
+.vog-category-view .subcategory-grid .subcat b{font-size:clamp(13px,2.9vw,16px)!important;line-height:1.45!important;font-weight:800!important}
+.vog-category-view .subcategory-grid .subcat small{font-size:12px!important;color:#805e91!important}
+.vog-category-view .subcategory-grid .subcat:hover{transform:translateY(-3px)!important;box-shadow:0 12px 23px rgba(73,30,93,.11)!important}
+.vog-category-view .subcategory-grid .subcat:active{transform:scale(.955)!important;box-shadow:0 2px 8px rgba(73,30,93,.07)!important}
+.vog-category-view #cards .item{border:1px solid #e9deed!important;border-radius:21px!important;box-shadow:0 6px 20px rgba(73,30,93,.045)!important;background:#fff!important}
+.vog-category-view #cards .item:active{transform:scale(.99)!important}
+@media(prefers-reduced-motion:no-preference){.vog-category-hero .container>*{animation:vog36appear .65s cubic-bezier(.2,.8,.2,1) both}.vog-category-hero h1{animation-delay:.1s}.vog-category-hero p{animation-delay:.2s}.vog-category-view .subcategory-grid .subcat{animation:vog36appear .48s cubic-bezier(.2,.8,.2,1) both!important;animation-delay:calc(min(var(--vog-order,0),8) * 55ms)!important}@keyframes vog36appear{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}}
+@media(prefers-reduced-motion:reduce){.vog-category-hero .container>*,.vog-category-view .subcategory-grid .subcat{animation:none!important;transition:none!important}}
+@media(max-width:420px){.menu-cat{min-height:90px!important}.vog-category-view .subcategory-grid .subcat{min-height:116px!important;padding:18px 12px!important}}
+</style>
 </head>
 <body>
 
@@ -460,6 +497,9 @@ body:not(.vog-category-view) #categories .cat{animation:vog27-card .7s cubic-bez
 const SITE_CONFIG={facebook:"",email:""};
 const categories=[
 ["🏛️","সরকারি ও ইউনিয়ন সেবা","government"],["🏫","শিক্ষা প্রতিষ্ঠান","education"],["🩸","ব্লাড ডোনার্স","blood"],["🏥","স্বাস্থ্যসেবা","health"],["🏪","ব্যবসা ও দোকান","business"],["🏦","ব্যাংক","banking"],["🕌","ধর্মীয় প্রতিষ্ঠান","religion"],["🚨","জরুরি নম্বর","emergency"],["📚","কোচিং / হোম টিউটর","coaching"],["👮","পুলিশ","police"],["🚒","ফায়ার সার্ভিস","fire"],["🚑","অ্যাম্বুলেন্স","ambulance"],["👨‍⚕️","ডাক্তার","doctor"],["⚡","বিদ্যুৎ","electricity"],["📍","গুরুত্বপূর্ণ স্থান","places"],["🌟","গুরুত্বপূর্ণ ব্যক্তিবর্গ","people"],["🗺️","গৈলার ম্যাপ","map"],["📮","ডাকঘর","post"],["🚍","যাতায়াত ও যোগাযোগ","transport"],["🤝","সামাজিক সংগঠন","social"],["📢","গুরুত্বপূর্ণ ঘোষণা","news"]];
+// Keep coaching last in home categories, quick menu and category selectors.
+const coachingPosition=categories.findIndex(c=>c[2]==="coaching");
+if(coachingPosition>=0)categories.push(...categories.splice(coachingPosition,1));
 const subcategories={government:[["union","ইউনিয়ন পরিষদ"],["upazila","উপজেলা সরকারি কর্মকর্তা"],["govt-office","অন্যান্য সরকারি অফিস"],["public-service","সরকারি সেবা"]],education:[["primary","প্রাথমিক বিদ্যালয়"],["secondary","মাধ্যমিক বিদ্যালয়"],["college","কলেজ"],["madrasa","মাদ্রাসা"],["teachers","শিক্ষক ও কর্মচারী"],["other","অন্যান্য শিক্ষা প্রতিষ্ঠান"]],coaching:[["coaching-center","কোচিং সেন্টার"],["home-tutor","হোম টিউটর"],["subject-tutor","বিষয়ভিত্তিক শিক্ষক"],["admission","ভর্তি / এডমিশন কোচিং"],["other","অন্যান্য"]],health:[["hospital","হাসপাতাল/ক্লিনিক"],["doctor","ডাক্তার"],["diagnostic","ডায়াগনস্টিক/ল্যাব"],["ambulance","অ্যাম্বুলেন্স"]],business:[["grocery","মুদি দোকান"],["restaurant","হোটেল/রেস্টুরেন্ট"],["pharmacy","ফার্মেসি"],["sweets","মিষ্টান্ন ভান্ডার/বেকারি"],["library","লাইব্রেরি/স্টেশনারি"],["mfs","বিকাশ/নগদ/রকেট এজেন্ট"],["fashion","কাপড় ও ফ্যাশন"],["tailor","টেইলার্স"],["cosmetics","কসমেটিকস"],["mobile","মোবাইল/ইলেকট্রনিক্স"],["mobile-service","মোবাইল সার্ভিসিং"],["computer","কম্পিউটার/ফটোকপি/অনলাইন সেবা"],["hardware","হার্ডওয়্যার/নির্মাণ সামগ্রী"],["raw-material","কাঁচামাল/পাইকারি"],["furniture","ফার্নিচার"],["salon","সেলুন/পার্লার"],["agri","কৃষি উপকরণ"],["service","অন্যান্য ব্যবসা/সেবা"]],banking:[["bank","ব্যাংক শাখা"],["atm","ATM"],["agent","ব্যাংক এজেন্ট"],["mfs","বিকাশ/নগদ/রকেট"]],religion:[["mosque","মসজিদ"],["madrasa","ধর্মীয় শিক্ষা"],["other","অন্যান্য ধর্মীয় প্রতিষ্ঠান"]],blood:[["all","সব ব্লাড ডোনার"],["a+","A+"],["a-","A-"],["b+","B+"],["b-","B-"],["o+","O+"],["o-","O-"],["ab+","AB+"],["ab-","AB-"]],people:[["entrepreneur","উদ্যোক্তা"],["notable","বিশিষ্ট ব্যক্তিবর্গ"],["university-student","দেশ-বিদেশে বিশ্ববিদ্যালয়ের শিক্ষার্থী"],["innovator","উদ্ভাবক"],["social-worker","সমাজসেবক"],["professional","অন্যান্য কৃতী/পেশাজীবী"]],post:[["post-office","ডাকঘর"]],transport:[["bus","বাস/গণপরিবহন"],["courier","ডাক/কুরিয়ার"],["garage","গ্যারেজ/মেরামত"],["other","অন্যান্য যোগাযোগ সেবা"]],social:[["social-org","সামাজিক সংগঠন"],["club","ক্লাব/যুব সংগঠন"],["ngo","এনজিও/স্বেচ্ছাসেবী সংগঠন"]],news:[]};
 let data=[
 {cat:"government",subcat:"union",name:"গৈলা ইউনিয়ন পরিষদ",address:"ঠিকানা যোগ করুন",phone:"",map:"",desc:"চেয়ারম্যান, সচিব ও অফিসের তথ্য যোগ করুন।"},
@@ -1498,7 +1538,7 @@ body.vog-category-view #resultsSection{padding-top:14px}body.vog-category-view #
     const em=typeof emergencyNumbers!=='undefined'?emergencyNumbers:[];
     area.innerHTML='<div class="panel"><div class="emergency-list">'+em.map(x=>'<div class="emergency-row"><div class="emergency-info"><b>'+esc(x.icon)+' '+esc(x.name)+'</b><span>'+esc(x.note)+'</span></div><a class="emergency-call" href="tel:'+esc(x.phone)+'">📞 '+esc(x.phone)+'</a></div>').join('')+'</div></div>';
   }else if(subs.length){
-    area.innerHTML='<div class="panel"><div class="subcategory-grid">'+subs.map(x=>'<a class="subcat" href="'+catUrl+'&sub='+encodeURIComponent(x[0])+'"><b>'+esc(x[1])+'</b><small>বিস্তারিত দেখুন →</small></a>').join('')+'</div></div>';
+    area.innerHTML='<div class="panel"><div class="subcategory-grid">'+subs.map((x,i)=>'<a class="subcat" style="--vog-order:'+i+'" href="'+catUrl+'&sub='+encodeURIComponent(x[0])+'"><b>'+esc(x[1])+'</b><small>বিস্তারিত দেখুন →</small></a>').join('')+'</div></div>';
   }else{area.innerHTML='';}
   actions.innerHTML=(chosen?'<a href="'+catUrl+'">← '+esc(info[1])+' বিভাগে ফিরে যান</a>':'')+'<button type="button" class="vog-add" id="vogContextAdd">＋ তথ্য যোগ করুন</button><a href="index.html">⌂ হোমপেজে ফিরে যান</a>';
   document.getElementById('vogContextAdd').addEventListener('click',addInfo);
