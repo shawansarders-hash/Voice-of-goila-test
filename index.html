@@ -712,7 +712,20 @@ body:not(.vog-category-view) #categories .cat small{
 @media(max-width:760px){.review-box{grid-template-columns:1fr!important}.rating-summary{padding:17px 19px!important}.review-form-card{padding:18px!important}}
 @media(prefers-reduced-motion:reduce){.star-picker button{transition:none!important}}
 </style>
-</head>
+<style id="vog42-review-refinement">
+.review-section{padding-top:18px!important;padding-bottom:16px!important}
+.review-section .section-head{margin-bottom:10px!important}
+.review-box{gap:10px!important}
+.rating-summary,.review-form-card{padding:14px 16px!important;border-radius:18px!important}
+.rating-score strong{font-size:37px!important}
+.rating-stars-display,.review-card .stars{color:#c9992c!important}
+.star-picker button.active{color:#d3a12c!important}
+.star-picker button{font-size:26px!important}
+.review-form-card h4{font-size:16px!important}
+.review-input,.review-textarea{padding:10px 12px!important}
+.review-card{padding:12px 14px!important;margin-bottom:8px!important}
+.review-more-btn{background:#f5eef8!important;border:1px solid #e8d8ef!important;font-size:13px!important;padding:10px 17px!important}
+</style></head>
 <body>
 
 <div id="vogBrowserAppPrompt" role="dialog" aria-label="Voice of Goila অ্যাপ ডাউনলোড">
@@ -1285,21 +1298,17 @@ $("count").textContent=visibleCategories().length+"+";renderCats();renderMenu();
     function paintApprovedReviewList(){
         const list=byId("reviewList");
         if(!list)return;
-        const rows=showAllApprovedReviews?approvedReviewRows:approvedReviewRows.slice(0,5);
+        const rows=approvedReviewRows.slice(0,5);
         list.innerHTML=rows.map(r=>{
             const rating=Math.max(1,Math.min(5,Number(r.rating||0)));
             return `<article class="review-card"><div class="review-card-top"><b>${esc(r.name||"একজন ব্যবহারকারী")}</b><span class="stars">${"★".repeat(rating)}${"☆".repeat(5-rating)}</span></div>${r.review_text?`<p>${esc(r.review_text)}</p>`:""}</article>`;
         }).join("");
         const wrap=byId("reviewMoreWrap"),btn=byId("reviewMoreBtn");
-        if(wrap)wrap.style.display=approvedReviewRows.length>5?"block":"none";
-        if(btn)btn.textContent=showAllApprovedReviews?"কম দেখুন":"সব রিভিউ দেখুন";
+        if(wrap)wrap.style.display=approvedReviewRows.length>0?"block":"none";
+        if(btn)btn.textContent="সব রিভিউ দেখুন →";
     }
 
-    window.toggleAllReviews=function(){
-        showAllApprovedReviews=!showAllApprovedReviews;
-        paintApprovedReviewList();
-        if(!showAllApprovedReviews)byId("reviewSection")?.scrollIntoView({behavior:"smooth",block:"start"});
-    };
+    window.toggleAllReviews=function(){window.location.href="reviews.html";};
 
     function renderApprovedReviews(rows){
         approvedReviewRows=Array.isArray(rows)?rows:[];
