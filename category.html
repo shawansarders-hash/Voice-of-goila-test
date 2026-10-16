@@ -1536,7 +1536,7 @@ body.vog-category-view #resultsSection{padding-top:14px}body.vog-category-view #
   if(chosen){area.innerHTML='';}
   else if(slug==='emergency'){
     const em=typeof emergencyNumbers!=='undefined'?emergencyNumbers:[];
-    area.innerHTML='<div class="panel"><div class="emergency-list">'+em.map(x=>'<div class="emergency-row"><div class="emergency-info"><b>'+esc(x.icon)+' '+esc(x.name)+'</b><span>'+esc(x.note)+'</span></div><a class="emergency-call" href="tel:'+esc(x.phone)+'">📞 '+esc(x.phone)+'</a></div>').join('')+'</div></div>';
+    area.innerHTML='<div class="panel"><div class="emergency-list">'+em.map(x=>'<div class="emergency-row"><div class="emergency-info"><b>'+esc(x.icon)+' '+esc(x.name)+'</b><span>'+esc(x.note)+'</span></div><a class="emergency-call" href="tel:'+esc(x.phone)+'">📞 '+esc(x.phone)+'</a><button class="vog-em-share" type="button" data-name="'+esc(x.name)+'" data-phone="'+esc(x.phone)+'" onclick="shareEmergencyInfo(this)">↗ শেয়ার</button></div>').join('')+'</div></div>';
   }else if(subs.length){
     area.innerHTML='<div class="panel"><div class="subcategory-grid">'+subs.map((x,i)=>'<a class="subcat" style="--vog-order:'+i+'" href="'+catUrl+'&sub='+encodeURIComponent(x[0])+'"><b>'+esc(x[1])+'</b><small>বিস্তারিত দেখুন →</small></a>').join('')+'</div></div>';
   }else{area.innerHTML='';}

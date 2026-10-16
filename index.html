@@ -741,8 +741,8 @@ function itemMatchesSubcategory(x,main,sub){
 }
 function categoryCount(slug){return slug==="news"?importantAnnouncements.length:data.filter(x=>itemMatchesCategory(x,slug)).length}
 function renderCats(){$("categories").innerHTML=visibleCategories().map(c=>`<div class="cat" data-vog-icon="${c[0]}" onclick="openCategory('${c[2]}')"><div class="ico">${c[0]}</div><b>${c[1]}</b><small>${categoryCount(c[2])?categoryCount(c[2])+"টি তথ্য":"বিভাগ দেখুন"} →</small></div>`).join("")}
-function renderMenu(){const cw=$("menuCategories"),ew=$("menuEmergency");cw.innerHTML=visibleCategories().map(c=>`<button class="menu-cat" onclick="openCategory('${c[2]}')"><i>${c[0]}</i><span>${c[1]}</span></button>`).join("");ew.innerHTML=emergencyNumbers.map(x=>`<div class="menu-em-item"><b>${x.icon} ${x.name}</b><small>${x.note}</small><a href="tel:${x.phone}">📞 ${x.phone}</a></div>`).join("")}
-function renderEmergency(){ $("emergencyGrid").innerHTML=emergencyNumbers.map(x=>`<div class="em"><b>${x.icon} ${x.name}</b><small>${x.note}</small><a href="tel:${x.phone}">📞 ${x.phone}</a></div>`).join("") }
+function renderMenu(){const cw=$("menuCategories"),ew=$("menuEmergency");cw.innerHTML=visibleCategories().map(c=>`<button class="menu-cat" onclick="openCategory('${c[2]}')"><i>${c[0]}</i><span>${c[1]}</span></button>`).join("");ew.innerHTML=emergencyNumbers.map(x=>`<div class="menu-em-item"><b>${x.icon} ${x.name}</b><small>${x.note}</small><a href="tel:${x.phone}">📞 ${x.phone}</a><button class="vog-em-share" type="button" onclick="shareEmergencyInfo(this)" data-name="${escapeAttr(x.name)}" data-phone="${escapeAttr(x.phone)}">↗ শেয়ার</button></div>`).join("")}
+function renderEmergency(){ $("emergencyGrid").innerHTML=emergencyNumbers.map(x=>`<div class="em"><b>${x.icon} ${x.name}</b><small>${x.note}</small><a href="tel:${x.phone}">📞 ${x.phone}</a><button class="vog-em-share" type="button" onclick="shareEmergencyInfo(this)" data-name="${escapeAttr(x.name)}" data-phone="${escapeAttr(x.phone)}">↗ শেয়ার</button></div>`).join("") }
 function openCategory(slug){if(!location.pathname.endsWith("category.html")){location.href="category.html?section="+encodeURIComponent(slug);return;}closeSideMenu();if(slug==="news"){if(importantAnnouncements.length)$("announcementSection").scrollIntoView({behavior:"smooth",block:"start"});return}if(slug==="map"){window.open("https://www.google.com/maps/search/Goila+Union,+Agailjhara,+Barishal","_blank","noopener");return}if(slug==="emergency"){showEmergencyModal();return}const direct=["police","fire","ambulance","doctor","electricity","places"];if(direct.includes(slug)){showCategoryModal(slug,catInfo(slug)[0]+" "+catInfo(slug)[1]);return}const list=subcategories[slug]||[];if(list.length){showSubcategories(slug);return}showCategoryModal(slug,catInfo(slug)[0]+" "+catInfo(slug)[1])}
 function showSubcategories(main){const c=catInfo(main),list=subcategories[main]||[],area=$("subcategoryArea");area.hidden=false;area.innerHTML=`<div class="panel"><button class="subcat-back" onclick="closeSubcategories()">← সব ক্যাটাগরি</button><h3 style="margin:0 0 11px;font-size:17px">${c[0]} ${c[1]}</h3><div class="subcategory-grid">${list.map(s=>{const n=data.filter(x=>itemMatchesSubcategory(x,main,s[0])).length;return `<div class="subcat" onclick="filterSub('${main}','${s[0]}')"><b>${s[1]}</b><small>${n?n+'টি তথ্য':'তথ্য দেখুন'} →</small></div>`}).join("")}</div></div>`;area.scrollIntoView({behavior:"smooth",block:"nearest"})}
 function closeSubcategories(){const a=$("subcategoryArea");a.hidden=true;a.innerHTML=""}
@@ -1381,7 +1381,7 @@ $("count").textContent=visibleCategories().length+"+";renderCats();renderMenu();
     };
     window.shareDirectoryItem=async function(id){
         const x=(typeof data!=="undefined"?data:[]).find(v=>Number(v.id)===Number(id));if(!x)return;
-        const url=new URL(location.href);url.searchParams.set("item",String(id));url.hash="";
+        const url=new URL("index.html",location.href);url.searchParams.set("item",String(id));url.hash="";
         const payload={title:x.name||"Voice of Goila",text:`${x.name||""} — Voice of Goila`,url:url.toString()};
         try{if(navigator.share){await navigator.share(payload);}else if(navigator.clipboard){await navigator.clipboard.writeText(payload.url);toast("Link copied ✓");}else{prompt("Copy link",payload.url);}}catch(e){}
     };
@@ -1395,7 +1395,7 @@ $("count").textContent=visibleCategories().length+"+";renderCats();renderMenu();
     if(typeof window.doSearch==="function"){
         const original=window.doSearch;window.doSearch=function(){const q=String(byId("search")?.value||"").trim();if(q.length>=2)trackEvent("search",q,null);return original.apply(this,arguments);};
     }
-    function openDeepLinkedItem(attempt=0){const id=new URLSearchParams(location.search).get("item");if(!id)return;const rows=(typeof data!=="undefined"&&Array.isArray(data))?data:[];if(rows.some(x=>Number(x.id)===Number(id))&&typeof window.openItemDetails==="function"){window.openItemDetails(Number(id));return;}if(attempt<12)setTimeout(()=>openDeepLinkedItem(attempt+1),300);}
+    function openDeepLinkedItem(attempt=0){const id=new URLSearchParams(location.search).get("item");if(!id)return;const rows=(typeof data!=="undefined"&&Array.isArray(data))?data:[];if(rows.some(x=>Number(x.id)===Number(id))&&typeof window.openItemDetails==="function"){window.openItemDetails(Number(id));return;}if(attempt<80)setTimeout(()=>openDeepLinkedItem(attempt+1),350);}
     window.addEventListener("load",()=>{loadPublicNotices();setTimeout(()=>openDeepLinkedItem(0),500);},{once:true});
 })();
 </script>
@@ -1718,5 +1718,33 @@ $("count").textContent=visibleCategories().length+"+";renderCats();renderMenu();
   if(target&&window.MutationObserver)new MutationObserver(function(){if(pending)return;pending=true;requestAnimationFrame(function(){pending=false;scan()})}).observe(target,{childList:true});
   ['resultsSection','reviewSection'].forEach(function(id){var el=document.getElementById(id);if(el&&window.MutationObserver)new MutationObserver(function(){if(pending)return;pending=true;requestAnimationFrame(function(){pending=false;scan()})}).observe(el,{childList:true,subtree:true})});
 })();
+</script>
+
+<style id="vog37-compact-menu-share">
+/* Compact, airy menu: one-line rows instead of tall tiles. */
+.side-menu{width:min(89vw,355px)!important;padding:14px!important}
+.side-menu-head{padding:5px 3px 11px!important;margin-bottom:4px!important}
+.side-menu-title{font-size:19px!important}
+.side-menu-body{padding:0 2px 14px!important}
+.menu-group h4{font-size:12px!important;margin:12px 0 9px!important;letter-spacing:.2px}
+.menu-cats{gap:7px!important}
+.menu-cat{min-height:61px!important;padding:9px!important;gap:7px!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;border-radius:13px!important;font-size:11px!important;box-shadow:none!important;background:#fff!important}
+.menu-cat i{width:31px!important;height:31px!important;min-width:31px!important;font-size:17px!important;border-radius:9px!important}
+.menu-cat span{font-size:11px!important;line-height:1.3!important}
+.menu-em-item{border-radius:12px!important}
+.vog-em-share{font:inherit;font-size:11px;font-weight:750;color:#6b2c91;background:#f7f0fb;border:1px solid #e8d9f0;border-radius:10px;padding:8px 11px;cursor:pointer;margin-top:5px}
+.vog-em-share:active{transform:scale(.97)}
+.em a[href^="tel:"],.menu-em-item a[href^="tel:"]{display:inline-flex;align-items:center;justify-content:center;border-radius:11px;padding:9px 12px;background:#f2e8f9;color:#5f247f;font-weight:850;text-decoration:none}
+@media(prefers-reduced-motion:reduce){.vog-em-share{transition:none!important}}
+</style>
+<script id="vog37-emergency-share">
+window.shareEmergencyInfo=async function(button){
+ const name=button.dataset.name||'জরুরি সেবা',phone=button.dataset.phone||'';
+ const url=new URL('index.html#emergencySection',location.href).href;
+ const payload={title:name,text:name+' — '+phone+' | Voice of Goila',url};
+ try{if(navigator.share)await navigator.share(payload);
+ else if(navigator.clipboard){await navigator.clipboard.writeText(payload.text+'\n'+payload.url);if(typeof toast==='function')toast('তথ্য কপি হয়েছে');}
+ else prompt('তথ্য কপি করুন',payload.text+'\n'+payload.url);}catch(e){}
+};
 </script>
 </body></html>
