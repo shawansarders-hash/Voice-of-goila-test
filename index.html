@@ -1,6 +1,18 @@
 <!doctype html>
 <html lang="bn" class="vog-live-loading">
 <head>
+<script>
+// Supabase dashboard recovery emails may use the Site URL (homepage).
+// Preserve the recovery tokens while forwarding to the dedicated reset form.
+(function(){
+  var h = new URLSearchParams(location.hash.slice(1));
+  var q = new URLSearchParams(location.search);
+  if(h.get('type') === 'recovery' || q.get('type') === 'recovery' || q.has('token_hash') && q.get('type') === 'recovery'){
+    location.replace('reset-password.html' + location.search + location.hash);
+  }
+})();
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#6B2C91">
